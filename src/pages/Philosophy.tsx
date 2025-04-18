@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import NavigationHeader from '@/components/NavigationHeader';
 import Footer from '@/components/Footer';
 import AnimatedText from '@/components/AnimatedText';
@@ -7,6 +7,15 @@ import { Button } from '@/components/ui/button';
 import { Wand2, Sparkles, Lightbulb, Music } from 'lucide-react';
 
 const Philosophy = () => {
+  useEffect(() => {
+    // Update metadata when component mounts
+    document.title = "Our Philosophy | RocketNow";
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute('content', 'Discover RocketNow\'s unique philosophy of business growth through resonance, harmony, and natural amplification. Join our selective ensemble of success.');
+    }
+  }, []);
+
   return (
     <div className="min-h-screen">
       <NavigationHeader />
