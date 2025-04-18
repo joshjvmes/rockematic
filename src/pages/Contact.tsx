@@ -12,7 +12,7 @@ import * as z from 'zod';
 import { Mail, MapPin, Phone, Send } from 'lucide-react';
 import RippleBackground from '@/components/RippleBackground';
 import { useToast } from '@/components/ui/use-toast';
-import { supabase } from '@/lib/supabase';
+import { supabase } from '@/integrations/supabase/client';
 
 const contactFormSchema = z.object({
   name: z.string().min(2, { message: 'Name must be at least 2 characters.' }),
