@@ -6,8 +6,11 @@ import HarmonicCard from '@/components/HarmonicCard';
 import RippleBackground from '@/components/RippleBackground';
 import { Check, BarChart3, Zap, Target, LineChart, Users, Gem, Award } from 'lucide-react';
 import PaymentButton from '@/components/PaymentButton';
+import { useNavigate } from 'react-router-dom';
 
 const Services = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="min-h-screen">
       <NavigationHeader />
@@ -140,6 +143,7 @@ const Services = () => {
               <Button 
                 size="lg" 
                 className="bg-white text-harmony-deep hover:bg-harmony-accent hover:text-harmony-deep rounded-full px-8"
+                onClick={() => navigate('/services/harmonic-growth-system')}
               >
                 Learn More
               </Button>
