@@ -1,4 +1,5 @@
-import React, { useRef, useEffect } from 'react';
+
+import React, { useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { ChevronDown, BarChart3, Zap, ChevronsUp, Users } from 'lucide-react';
 import NavigationHeader from '@/components/NavigationHeader';
@@ -31,6 +32,7 @@ const Index = () => {
                 text="The Future of Business Growth"
                 className="text-harmony-medium"
                 animationType="fade"
+                textColor="primary"
               />
             </div>
             
@@ -41,6 +43,7 @@ const Index = () => {
                 className="block mb-2"
                 animationType="reveal"
                 animationDelay={0.3}
+                textColor="default"
               />
               <AnimatedText
                 text="Harmonic Growth Engine"
@@ -48,6 +51,7 @@ const Index = () => {
                 className="block bg-clip-text text-transparent bg-gradient-to-r from-harmony-medium to-harmony-light"
                 animationType="reveal"
                 animationDelay={0.8}
+                textColor="primary"
               />
             </h1>
             
@@ -56,6 +60,7 @@ const Index = () => {
                 text="Where growth moves to a natural rhythm, and every success resonates with purpose."
                 animationType="fade"
                 animationDelay={1.5}
+                textColor="default"
               />
             </p>
             
@@ -93,8 +98,9 @@ const Index = () => {
       {/* Resonant Returns Section */}
       <section ref={firstSectionRef} className="py-20 md:py-32 bg-harmony-deep text-white relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
+          {/* Use placeholder image if ripple.jpg is missing */}
           <img 
-            src="/ripple.jpg" 
+            src="/placeholder.svg" 
             alt="Water Ripple Effect" 
             className="w-full h-full object-cover"
           />
@@ -185,7 +191,7 @@ const Index = () => {
       {/* Selective Harmony Section */}
       <section className="py-20 md:py-32 bg-gradient-to-br from-harmony-deep to-harmony-medium text-white relative overflow-hidden">
         <div className="absolute inset-0 opacity-5">
-          <div className="h-full w-full bg-[url('/ripple.jpg')] bg-cover bg-center" />
+          <div className="h-full w-full bg-[url('/placeholder.svg')] bg-cover bg-center" />
         </div>
         
         <div className="container mx-auto px-6 relative z-10">
@@ -195,8 +201,12 @@ const Index = () => {
                 <div className="relative h-96 w-full rounded-2xl overflow-hidden">
                   <img 
                     src="/cascade.jpg" 
-                    alt="Cascading Waterfall at Multnomah Falls" 
+                    alt="Cascading Waterfall" 
                     className="h-full w-full object-cover"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.src = '/placeholder.svg';
+                    }}
                   />
                   <div className="absolute inset-0 bg-harmony-medium/30" />
                 </div>

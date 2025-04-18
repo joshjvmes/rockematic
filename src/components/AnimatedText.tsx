@@ -23,10 +23,11 @@ const AnimatedText: React.FC<AnimatedTextProps> = ({
 }) => {
   const [isVisible, setIsVisible] = useState(false);
   
+  // Enhanced color classes with better visibility
   const colorClasses = {
-    default: 'text-foreground',
-    primary: 'text-harmony-medium',
-    secondary: 'text-harmony-light'
+    default: 'text-foreground font-medium',
+    primary: 'text-harmony-medium font-semibold',
+    secondary: 'text-harmony-light font-semibold'
   };
 
   useEffect(() => {
@@ -59,11 +60,12 @@ const AnimatedText: React.FC<AnimatedTextProps> = ({
     return (
       <Component className={cn(
         colorClasses[textColor], 
+        'leading-normal',
         className
       )}>
         {displayText}
         <span 
-          className={`inline-block w-0.5 h-5 bg-harmony-light animate-pulse ml-0.5`}
+          className="inline-block w-0.5 h-5 bg-harmony-light animate-pulse ml-0.5"
           style={{ opacity: displayText.length === text.length ? 0 : 1 }} 
         />
       </Component>
@@ -72,7 +74,7 @@ const AnimatedText: React.FC<AnimatedTextProps> = ({
   
   if (animationType === 'reveal') {
     return (
-      <Component className={cn('overflow-hidden', colorClasses[textColor], className)}>
+      <Component className={cn('overflow-hidden', colorClasses[textColor], 'leading-normal', className)}>
         {text.split(' ').map((word, wordIndex) => (
           <span key={wordIndex} className="inline-block mr-2 overflow-hidden">
             <span
@@ -95,6 +97,7 @@ const AnimatedText: React.FC<AnimatedTextProps> = ({
     <Component 
       className={cn(
         colorClasses[textColor], 
+        'leading-normal',
         className
       )}
       style={{ 
