@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -18,6 +17,10 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import AdminRoute from "./components/AdminRoute";
 import ResonanceAnalysis from "./pages/services/ResonanceAnalysis";
 import GrowthAmplification from "./pages/services/GrowthAmplification";
+import MomentumOrchestration from "./pages/services/MomentumOrchestration";
+import HarmonyIntegration from "./pages/services/HarmonyIntegration";
+import FlowAutomation from "./pages/services/FlowAutomation";
+import ResonantLeadership from "./pages/services/ResonantLeadership";
 
 const queryClient = new QueryClient();
 
@@ -34,10 +37,13 @@ const App = () => (
             <Route path="/services" element={<Services />} />
             <Route path="/services/resonance-analysis" element={<ResonanceAnalysis />} />
             <Route path="/services/growth-amplification" element={<GrowthAmplification />} />
+            <Route path="/services/momentum-orchestration" element={<MomentumOrchestration />} />
+            <Route path="/services/harmony-integration" element={<HarmonyIntegration />} />
+            <Route path="/services/flow-automation" element={<FlowAutomation />} />
+            <Route path="/services/resonant-leadership" element={<ResonantLeadership />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/auth" element={<AuthPage />} />
             
-            {/* Protected routes */}
             <Route path="/dashboard" element={
               <ProtectedRoute>
                 <Dashboard />
@@ -54,7 +60,6 @@ const App = () => (
               </AdminRoute>
             } />
             
-            {/* Catch-all route */}
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
