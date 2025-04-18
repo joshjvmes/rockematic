@@ -1,4 +1,3 @@
-
 import React, { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -112,7 +111,6 @@ const Index = () => {
       {/* Resonant Returns Section */}
       <section ref={firstSectionRef} className="py-20 md:py-32 bg-harmony-deep text-white relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
-          {/* Use placeholder image if ripple.jpg is missing */}
           <img 
             src="/placeholder.svg" 
             alt="Water Ripple Effect" 
@@ -205,7 +203,7 @@ const Index = () => {
       {/* Selective Harmony Section */}
       <section className="py-20 md:py-32 bg-gradient-to-br from-harmony-deep to-harmony-medium text-white relative overflow-hidden">
         <div className="absolute inset-0 opacity-5">
-          <div className="h-full w-full bg-[url('/placeholder.svg')] bg-cover bg-center" />
+          <div className="h-full w-full bg-[url('/rockematic-kael-3.png')] bg-cover bg-center" />
         </div>
         
         <div className="container mx-auto px-6 relative z-10">
@@ -262,7 +260,10 @@ const Index = () => {
       {/* Join the Symphony CTA */}
       <section className="py-20 md:py-32 relative overflow-hidden">
         <div className="absolute inset-0 -z-10">
-          <RippleBackground intensity="medium" />
+          <div 
+            className="absolute inset-0 bg-cover bg-center opacity-10" 
+            style={{ backgroundImage: "url('/rockematic-kael-4.png')" }}
+          />
         </div>
         
         <div className="container mx-auto px-6 relative z-10">

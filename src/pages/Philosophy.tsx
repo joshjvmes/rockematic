@@ -1,4 +1,3 @@
-
 import React from 'react';
 import NavigationHeader from '@/components/NavigationHeader';
 import Footer from '@/components/Footer';
@@ -66,8 +65,8 @@ const Philosophy = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center mb-32">
             <div className="order-2 md:order-1">
               <img 
-                src="/cascade.jpg" 
-                alt="Cascading Waterfall" 
+                src="/rockematic-kael-2.png" 
+                alt="Cascading Growth" 
                 className="w-full rounded-2xl shadow-lg"
               />
             </div>
@@ -146,8 +145,8 @@ const Philosophy = () => {
       <section className="py-20 md:py-32 bg-harmony-deep text-white relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <img 
-            src="/ripple.jpg" 
-            alt="Water Ripple Effect" 
+            src="/rockematic-kael-1.png" 
+            alt="Harmonic Resonance" 
             className="w-full h-full object-cover"
           />
         </div>
