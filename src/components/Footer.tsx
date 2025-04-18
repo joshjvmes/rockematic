@@ -75,14 +75,13 @@ const Footer: React.FC = () => {
                 </a>
               </li>
               <li className="text-white/70">
-                <a href="tel:+15555551234" className="hover:text-white transition-colors">
-                  +1 (555) 555-1234
+                <a href="tel:+17787600329" className="hover:text-white transition-colors">
+                  +1 (778) 760-0329
                 </a>
               </li>
               <li className="text-white/70">
-                Symphony Tower<br />
-                123 Harmonic Way<br />
-                Resonance City, RC 90210
+                Suite 1800 - 1631 Dickson Rd<br />
+                Kelowna, BC V1Y 0B5
               </li>
             </ul>
           </div>

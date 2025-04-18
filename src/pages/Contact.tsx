@@ -230,8 +230,8 @@ const Contact = () => {
                     </div>
                     <div>
                       <h4 className="font-medium text-white mb-1">Phone</h4>
-                      <a href="tel:+15555551234" className="text-white/70 hover:text-white transition-colors">
-                        +1 (555) 555-1234
+                      <a href="tel:+17787600329" className="text-white/70 hover:text-white transition-colors">
+                        +1 (778) 760-0329
                       </a>
                     </div>
                   </div>
@@ -243,9 +243,8 @@ const Contact = () => {
                     <div>
                       <h4 className="font-medium text-white mb-1">Address</h4>
                       <address className="not-italic text-white/70">
-                        Symphony Tower<br />
-                        123 Harmonic Way<br />
-                        Resonance City, RC 90210
+                        Suite 1800 - 1631 Dickson Rd<br />
+                        Kelowna, BC V1Y 0B5
                       </address>
                     </div>
                   </div>
