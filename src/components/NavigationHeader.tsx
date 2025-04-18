@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -38,10 +39,6 @@ const NavigationHeader: React.FC = () => {
     navigate('/');
   };
 
-  const handleApplyClick = () => {
-    navigate('/apply');
-  };
-
   const getInitials = (name: string) => {
     return name
       .split(' ')
@@ -69,6 +66,7 @@ const NavigationHeader: React.FC = () => {
           <span className="font-serif text-2xl font-semibold tracking-tight">RocketNow</span>
         </Link>
 
+        {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8">
           <Link to="/" className="text-foreground/80 hover:text-foreground transition-colors">
             Home
@@ -85,12 +83,9 @@ const NavigationHeader: React.FC = () => {
           
           {user ? (
             <>
-              <Button 
-                onClick={handleApplyClick}
-                className="bg-harmony-medium hover:bg-harmony-light text-white"
-              >
-                Apply Now
-              </Button>
+              <Link to="/apply" className="text-foreground/80 hover:text-foreground transition-colors">
+                Apply
+              </Link>
               {isAdmin && (
                 <Link to="/admin" className="text-foreground/80 hover:text-foreground transition-colors">
                   Admin
@@ -130,6 +125,7 @@ const NavigationHeader: React.FC = () => {
           )}
         </nav>
 
+        {/* Mobile Menu Button */}
         <button 
           className="md:hidden p-2 text-foreground"
           onClick={toggleMobileMenu}
@@ -140,6 +136,7 @@ const NavigationHeader: React.FC = () => {
         </button>
       </div>
 
+      {/* Mobile Menu */}
       <div 
         className={cn(
           'fixed inset-0 bg-background flex flex-col pt-20 px-6 md:hidden transition-transform duration-300 ease-in-out z-40',
@@ -178,15 +175,13 @@ const NavigationHeader: React.FC = () => {
           
           {user ? (
             <>
-              <Button 
-                onClick={() => {
-                  handleApplyClick();
-                  setIsMobileMenuOpen(false);
-                }}
-                className="mt-4 bg-harmony-medium hover:bg-harmony-light text-white"
+              <Link 
+                to="/apply" 
+                className="text-xl text-foreground py-2 border-b border-border"
+                onClick={() => setIsMobileMenuOpen(false)}
               >
-                Apply Now
-              </Button>
+                Apply
+              </Link>
               {isAdmin && (
                 <Link 
                   to="/admin" 
