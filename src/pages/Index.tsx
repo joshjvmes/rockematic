@@ -1,4 +1,3 @@
-
 import React, { useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { ChevronDown, BarChart3, Zap, ChevronsUp, Users } from 'lucide-react';
@@ -196,7 +195,7 @@ const Index = () => {
                 <div className="relative h-96 w-full rounded-2xl overflow-hidden">
                   <img 
                     src="/cascade.jpg" 
-                    alt="Cascading Waterfall" 
+                    alt="Cascading Waterfall at Multnomah Falls" 
                     className="h-full w-full object-cover"
                   />
                   <div className="absolute inset-0 bg-harmony-medium/30" />
