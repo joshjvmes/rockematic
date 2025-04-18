@@ -16,6 +16,8 @@ import Application from "./pages/Application";
 import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 import AdminRoute from "./components/AdminRoute";
+import ResonanceAnalysis from "./pages/services/ResonanceAnalysis";
+import GrowthAmplification from "./pages/services/GrowthAmplification";
 
 const queryClient = new QueryClient();
 
@@ -30,6 +32,8 @@ const App = () => (
             <Route path="/" element={<Index />} />
             <Route path="/philosophy" element={<Philosophy />} />
             <Route path="/services" element={<Services />} />
+            <Route path="/services/resonance-analysis" element={<ResonanceAnalysis />} />
+            <Route path="/services/growth-amplification" element={<GrowthAmplification />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/auth" element={<AuthPage />} />
             
