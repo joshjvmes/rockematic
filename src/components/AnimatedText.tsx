@@ -9,6 +9,7 @@ interface AnimatedTextProps {
   animationType?: 'fade' | 'reveal' | 'typewriter';
   staggerDelay?: number;
   as?: React.ElementType;
+  textColor?: 'primary' | 'secondary' | 'default';
 }
 
 const AnimatedText: React.FC<AnimatedTextProps> = ({
@@ -17,10 +18,17 @@ const AnimatedText: React.FC<AnimatedTextProps> = ({
   animationDelay = 0,
   animationType = 'fade',
   staggerDelay = 0.05,
-  as: Component = 'span'
+  as: Component = 'span',
+  textColor = 'default'
 }) => {
   const [isVisible, setIsVisible] = useState(false);
   
+  const colorClasses = {
+    default: 'text-foreground',
+    primary: 'text-harmony-medium',
+    secondary: 'text-harmony-light'
+  };
+
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsVisible(true);
@@ -49,17 +57,22 @@ const AnimatedText: React.FC<AnimatedTextProps> = ({
     }, [isVisible, text, staggerDelay]);
     
     return (
-      <Component className={className}>
+      <Component className={cn(
+        colorClasses[textColor], 
+        className
+      )}>
         {displayText}
-        <span className="inline-block w-0.5 h-5 bg-harmony-light animate-pulse ml-0.5" 
-              style={{ opacity: displayText.length === text.length ? 0 : 1 }} />
+        <span 
+          className={`inline-block w-0.5 h-5 bg-harmony-light animate-pulse ml-0.5`}
+          style={{ opacity: displayText.length === text.length ? 0 : 1 }} 
+        />
       </Component>
     );
   }
   
   if (animationType === 'reveal') {
     return (
-      <Component className={cn('overflow-hidden', className)}>
+      <Component className={cn('overflow-hidden', colorClasses[textColor], className)}>
         {text.split(' ').map((word, wordIndex) => (
           <span key={wordIndex} className="inline-block mr-2 overflow-hidden">
             <span
@@ -80,7 +93,10 @@ const AnimatedText: React.FC<AnimatedTextProps> = ({
   // Default fade animation
   return (
     <Component 
-      className={className}
+      className={cn(
+        colorClasses[textColor], 
+        className
+      )}
       style={{ 
         opacity: isVisible ? 1 : 0,
         transition: `opacity 1s ease-out ${animationDelay}s`
