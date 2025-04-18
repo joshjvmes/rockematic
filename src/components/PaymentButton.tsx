@@ -12,7 +12,7 @@ interface PaymentButtonProps {
   children: React.ReactNode;
 }
 
-export function PaymentButton({ priceId, mode, className, children }: PaymentButtonProps) {
+export const PaymentButton = ({ priceId, mode, className, children }: PaymentButtonProps) => {
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
   const { user } = useAuth();
@@ -59,3 +59,5 @@ export function PaymentButton({ priceId, mode, className, children }: PaymentBut
     </Button>
   );
 }
+
+export default PaymentButton;
