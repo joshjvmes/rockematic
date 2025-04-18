@@ -4,15 +4,21 @@ import NavigationHeader from '@/components/NavigationHeader';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import RippleBackground from '@/components/RippleBackground';
-import { Layers, Check } from 'lucide-react';
+import { Layers, ArrowRight, Check, Zap, Users, Settings } from 'lucide-react';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from '@/components/ui/breadcrumb';
+import AnimatedText from '@/components/AnimatedText';
+import HarmonicCard from '@/components/HarmonicCard';
 
 const HarmonyIntegration = () => {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-gradient-to-b from-white to-harmony-light/5 relative overflow-hidden">
       <NavigationHeader />
       
-      <main className="pt-32 pb-20">
+      <main className="pt-32 pb-20 relative">
+        <div className="absolute inset-0 pointer-events-none">
+          <RippleBackground intensity="soft" color="rgba(155, 135, 245, 0.03)" />
+        </div>
+
         <div className="container mx-auto px-6">
           <Breadcrumb>
             <BreadcrumbList>
@@ -27,86 +33,139 @@ const HarmonyIntegration = () => {
           </Breadcrumb>
 
           <div className="max-w-4xl mx-auto">
-            <div className="mb-12 text-center">
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-harmony-light/10 mb-6">
-                <Layers className="h-8 w-8 text-harmony-medium" />
+            <div className="text-center mb-16 relative">
+              <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-harmony-light/10 mb-8 relative">
+                <Layers className="h-10 w-10 text-harmony-medium z-10" />
+                <div className="absolute inset-0">
+                  <RippleBackground intensity="medium" />
+                </div>
               </div>
-              <h1 className="text-4xl md:text-5xl font-serif font-bold mb-6">
-                Harmony Integration
-              </h1>
-              <p className="text-xl text-muted-foreground">
+              
+              <AnimatedText
+                text="Harmony Integration"
+                className="text-4xl md:text-5xl font-serif font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-harmony-medium to-harmony-light"
+                animationType="reveal"
+                staggerDelay={0.05}
+              />
+              
+              <p className="text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto">
                 Synchronize all elements of your business into a perfectly tuned system where every component amplifies the others.
               </p>
             </div>
 
-            <div className="prose prose-lg max-w-none mb-12">
-              <p>
-                Our Harmony Integration service aligns every aspect of your business operations 
-                into a synchronized system that works in perfect concert.
-              </p>
+            <section className="mb-16">
+              <div className="bg-white/50 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-harmony-light/10">
+                <h2 className="font-serif text-3xl mb-8 text-harmony-deep text-center">
+                  The Integration Process
+                </h2>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <HarmonicCard
+                    title="System Mapping"
+                    description="Create a comprehensive map of your business components and their interactions"
+                    icon={<Settings className="h-6 w-6 text-harmony-medium" />}
+                    color="water"
+                  />
+                  
+                  <HarmonicCard
+                    title="Harmony Analysis"
+                    description="Identify natural resonance points and optimization opportunities"
+                    icon={<Zap className="h-6 w-6 text-harmony-medium" />}
+                    color="forest"
+                  />
+                  
+                  <HarmonicCard
+                    title="Integration Design"
+                    description="Craft seamless connections between all business elements"
+                    icon={<ArrowRight className="h-6 w-6 text-harmony-medium" />}
+                    color="sunset"
+                  />
+                  
+                  <HarmonicCard
+                    title="Team Alignment"
+                    description="Ensure everyone moves in perfect synchronization"
+                    icon={<Users className="h-6 w-6 text-harmony-medium" />}
+                    color="primary"
+                  />
+                </div>
+              </div>
+            </section>
+
+            <section className="bg-harmony-deep text-white rounded-2xl p-8 mb-16 relative overflow-hidden">
+              <div className="absolute inset-0 opacity-10">
+                <RippleBackground intensity="strong" color="rgba(255, 255, 255, 0.1)" />
+              </div>
               
-              <h2>The Integration Process</h2>
-              <ul>
-                <li>System component mapping</li>
-                <li>Harmony point identification</li>
-                <li>Integration optimization</li>
-                <li>Synchronization refinement</li>
-              </ul>
-
-              <h2>Integration Benefits</h2>
-              <p>
-                Through harmonic integration, achieve:
-              </p>
-              <ul>
-                <li>Seamless operations flow</li>
-                <li>Enhanced team collaboration</li>
-                <li>Improved resource utilization</li>
-                <li>Maximized system efficiency</li>
-              </ul>
-            </div>
-
-            <div className="bg-harmony-deep text-white rounded-2xl p-8 mb-12">
-              <h3 className="text-2xl font-serif font-semibold mb-4">
-                The Integration Advantage
-              </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="flex items-start space-x-3">
-                  <Check className="h-5 w-5 text-harmony-light mt-1" />
-                  <div>
-                    <h4 className="font-medium mb-2">Perfect Sync</h4>
-                    <p className="text-white/80">All systems working as one</p>
+              <div className="relative">
+                <h3 className="text-2xl font-serif font-semibold mb-8 text-center">
+                  Integration Benefits
+                </h3>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div className="flex items-start space-x-4">
+                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-harmony-light/20 flex items-center justify-center">
+                      <Check className="h-4 w-4 text-harmony-light" />
+                    </div>
+                    <div>
+                      <h4 className="font-medium text-xl mb-2">Perfect Sync</h4>
+                      <p className="text-white/80 leading-relaxed">
+                        All systems working together in perfect harmony
+                      </p>
+                    </div>
                   </div>
-                </div>
-                <div className="flex items-start space-x-3">
-                  <Check className="h-5 w-5 text-harmony-light mt-1" />
-                  <div>
-                    <h4 className="font-medium mb-2">Enhanced Flow</h4>
-                    <p className="text-white/80">Friction-free operations</p>
+                  
+                  <div className="flex items-start space-x-4">
+                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-harmony-light/20 flex items-center justify-center">
+                      <Check className="h-4 w-4 text-harmony-light" />
+                    </div>
+                    <div>
+                      <h4 className="font-medium text-xl mb-2">Enhanced Flow</h4>
+                      <p className="text-white/80 leading-relaxed">
+                        Friction-free operations across all departments
+                      </p>
+                    </div>
                   </div>
-                </div>
-                <div className="flex items-start space-x-3">
-                  <Check className="h-5 w-5 text-harmony-light mt-1" />
-                  <div>
-                    <h4 className="font-medium mb-2">Unified Vision</h4>
-                    <p className="text-white/80">Aligned goals and execution</p>
+                  
+                  <div className="flex items-start space-x-4">
+                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-harmony-light/20 flex items-center justify-center">
+                      <Check className="h-4 w-4 text-harmony-light" />
+                    </div>
+                    <div>
+                      <h4 className="font-medium text-xl mb-2">Unified Vision</h4>
+                      <p className="text-white/80 leading-relaxed">
+                        Aligned goals and execution throughout the organization
+                      </p>
+                    </div>
                   </div>
-                </div>
-                <div className="flex items-start space-x-3">
-                  <Check className="h-5 w-5 text-harmony-light mt-1" />
-                  <div>
-                    <h4 className="font-medium mb-2">Maximum Impact</h4>
-                    <p className="text-white/80">Amplified business outcomes</p>
+                  
+                  <div className="flex items-start space-x-4">
+                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-harmony-light/20 flex items-center justify-center">
+                      <Check className="h-4 w-4 text-harmony-light" />
+                    </div>
+                    <div>
+                      <h4 className="font-medium text-xl mb-2">Maximum Impact</h4>
+                      <p className="text-white/80 leading-relaxed">
+                        Amplified results through synchronized efforts
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            </section>
 
             <div className="text-center">
+              <p className="text-lg text-muted-foreground italic mb-8">
+                "True harmony emerges when every part knows its role in the greater symphony."
+              </p>
+              
               <Button 
                 size="lg"
-                className="bg-harmony-medium hover:bg-harmony-light text-white rounded-full px-8"
+                className="bg-harmony-medium hover:bg-harmony-light text-white rounded-full px-12 py-6 text-lg shadow-xl shadow-harmony-medium/20 relative overflow-hidden group"
               >
-                Achieve Perfect Harmony
+                <span className="relative z-10">Begin Your Integration Journey</span>
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <RippleBackground intensity="strong" />
+                </div>
               </Button>
             </div>
           </div>
