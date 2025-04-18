@@ -4,15 +4,21 @@ import NavigationHeader from '@/components/NavigationHeader';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import RippleBackground from '@/components/RippleBackground';
-import { Zap, Check } from 'lucide-react';
+import AnimatedText from '@/components/AnimatedText';
+import HarmonicCard from '@/components/HarmonicCard';
+import { Zap, Cog, Gauge, Link2, Binary, Sparkles } from 'lucide-react';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from '@/components/ui/breadcrumb';
 
 const FlowAutomation = () => {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-gradient-to-b from-white to-harmony-light/5 relative overflow-hidden">
       <NavigationHeader />
       
-      <main className="pt-32 pb-20">
+      <main className="pt-32 pb-20 relative">
+        <div className="absolute inset-0 pointer-events-none">
+          <RippleBackground intensity="soft" color="rgba(155, 135, 245, 0.03)" />
+        </div>
+
         <div className="container mx-auto px-6">
           <Breadcrumb>
             <BreadcrumbList>
@@ -27,86 +33,147 @@ const FlowAutomation = () => {
           </Breadcrumb>
 
           <div className="max-w-4xl mx-auto">
-            <div className="mb-12 text-center">
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-harmony-light/10 mb-6">
-                <Zap className="h-8 w-8 text-harmony-medium" />
+            <div className="text-center mb-16 relative">
+              <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-harmony-light/10 mb-8 relative">
+                <Zap className="h-10 w-10 text-harmony-medium z-10" />
+                <div className="absolute inset-0">
+                  <RippleBackground intensity="medium" />
+                </div>
               </div>
-              <h1 className="text-4xl md:text-5xl font-serif font-bold mb-6">
-                Flow Automation
-              </h1>
-              <p className="text-xl text-muted-foreground">
-                Develop systems that maintain your growth momentum automatically, freeing you to focus on vision and innovation.
-              </p>
-            </div>
-
-            <div className="prose prose-lg max-w-none mb-12">
-              <p>
-                Our Flow Automation service creates intelligent systems that maintain 
-                and accelerate your business growth with minimal manual intervention.
-              </p>
               
-              <h2>The Automation Process</h2>
-              <ul>
-                <li>Flow pattern analysis</li>
-                <li>Automation opportunity mapping</li>
-                <li>System design and implementation</li>
-                <li>Continuous optimization</li>
-              </ul>
-
-              <h2>Automation Benefits</h2>
-              <p>
-                Through intelligent automation, achieve:
+              <AnimatedText
+                text="Flow Automation"
+                className="text-4xl md:text-5xl font-serif font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-harmony-medium to-harmony-light"
+                animationType="reveal"
+                staggerDelay={0.05}
+              />
+              
+              <p className="text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto">
+                Transform manual processes into effortless symphonies of efficiency, letting your business flow like water.
               </p>
-              <ul>
-                <li>Reduced manual oversight</li>
-                <li>Consistent execution</li>
-                <li>Scalable operations</li>
-                <li>Enhanced efficiency</li>
-              </ul>
             </div>
 
-            <div className="bg-harmony-deep text-white rounded-2xl p-8 mb-12">
-              <h3 className="text-2xl font-serif font-semibold mb-4">
-                The Automation Advantage
-              </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="flex items-start space-x-3">
-                  <Check className="h-5 w-5 text-harmony-light mt-1" />
-                  <div>
-                    <h4 className="font-medium mb-2">Effortless Growth</h4>
-                    <p className="text-white/80">Systems that work while you sleep</p>
-                  </div>
+            <section className="mb-16">
+              <div className="bg-white/50 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-harmony-light/10">
+                <h2 className="font-serif text-3xl mb-6 text-harmony-deep text-center">
+                  The Art of Effortless Flow
+                </h2>
+                
+                <div className="prose prose-lg max-w-none mb-8">
+                  <p className="text-lg leading-relaxed">
+                    Just as a river finds its most efficient path, your business processes can 
+                    achieve a state of natural, effortless flow. Through intelligent automation, 
+                    we transform complex operations into seamless cascades of productivity.
+                  </p>
                 </div>
-                <div className="flex items-start space-x-3">
-                  <Check className="h-5 w-5 text-harmony-light mt-1" />
-                  <div>
-                    <h4 className="font-medium mb-2">Perfect Consistency</h4>
-                    <p className="text-white/80">Error-free execution</p>
-                  </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 not-prose">
+                  <HarmonicCard
+                    title="Intelligent Systems"
+                    description="Create self-maintaining workflows that adapt and evolve"
+                    icon={<Cog className="h-6 w-6 text-harmony-medium" />}
+                    color="water"
+                  />
+                  
+                  <HarmonicCard
+                    title="Process Optimization"
+                    description="Streamline operations for maximum efficiency"
+                    icon={<Gauge className="h-6 w-6 text-harmony-medium" />}
+                    color="forest"
+                  />
+                  
+                  <HarmonicCard
+                    title="Seamless Integration"
+                    description="Connect all parts of your business ecosystem"
+                    icon={<Link2 className="h-6 w-6 text-harmony-medium" />}
+                    color="sunset"
+                  />
                 </div>
-                <div className="flex items-start space-x-3">
-                  <Check className="h-5 w-5 text-harmony-light mt-1" />
-                  <div>
-                    <h4 className="font-medium mb-2">Time Freedom</h4>
-                    <p className="text-white/80">Focus on what matters most</p>
+              </div>
+            </section>
+
+            <section className="bg-harmony-deep text-white rounded-2xl p-8 shadow-xl relative overflow-hidden mb-16">
+              <div className="absolute inset-0 opacity-10">
+                <RippleBackground intensity="strong" color="rgba(255, 255, 255, 0.1)" />
+              </div>
+              
+              <div className="relative">
+                <h3 className="text-2xl font-serif font-semibold mb-8 text-center">
+                  Your Automation Journey
+                </h3>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div className="space-y-6">
+                    <div className="flex items-start space-x-4">
+                      <div className="flex-shrink-0 w-8 h-8 rounded-full bg-harmony-light/20 flex items-center justify-center">
+                        <Binary className="h-4 w-4 text-harmony-light" />
+                      </div>
+                      <div>
+                        <h4 className="font-medium text-xl mb-2">Flow Mapping</h4>
+                        <p className="text-white/80 leading-relaxed">
+                          We analyze your current processes, identifying opportunities 
+                          for automation and optimization.
+                        </p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-start space-x-4">
+                      <div className="flex-shrink-0 w-8 h-8 rounded-full bg-harmony-light/20 flex items-center justify-center">
+                        <Cog className="h-4 w-4 text-harmony-light" />
+                      </div>
+                      <div>
+                        <h4 className="font-medium text-xl mb-2">System Design</h4>
+                        <p className="text-white/80 leading-relaxed">
+                          Custom automation solutions are crafted to match your 
+                          unique business rhythms.
+                        </p>
+                      </div>
+                    </div>
                   </div>
-                </div>
-                <div className="flex items-start space-x-3">
-                  <Check className="h-5 w-5 text-harmony-light mt-1" />
-                  <div>
-                    <h4 className="font-medium mb-2">Infinite Scalability</h4>
-                    <p className="text-white/80">Growth without limits</p>
+
+                  <div className="space-y-6">
+                    <div className="flex items-start space-x-4">
+                      <div className="flex-shrink-0 w-8 h-8 rounded-full bg-harmony-light/20 flex items-center justify-center">
+                        <Link2 className="h-4 w-4 text-harmony-light" />
+                      </div>
+                      <div>
+                        <h4 className="font-medium text-xl mb-2">Integration</h4>
+                        <p className="text-white/80 leading-relaxed">
+                          Seamlessly connect systems and processes into a 
+                          harmonious whole.
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start space-x-4">
+                      <div className="flex-shrink-0 w-8 h-8 rounded-full bg-harmony-light/20 flex items-center justify-center">
+                        <Sparkles className="h-4 w-4 text-harmony-light" />
+                      </div>
+                      <div>
+                        <h4 className="font-medium text-xl mb-2">Optimization</h4>
+                        <p className="text-white/80 leading-relaxed">
+                          Continuous refinement ensures your automated systems 
+                          evolve with your business.
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            </section>
 
-            <div className="text-center">
+            <div className="text-center space-y-6">
+              <p className="text-lg text-muted-foreground italic">
+                "True automation is not about replacing human effort, but amplifying human potential."
+              </p>
               <Button 
                 size="lg"
-                className="bg-harmony-medium hover:bg-harmony-light text-white rounded-full px-8"
+                className="bg-harmony-medium hover:bg-harmony-light text-white rounded-full px-12 py-6 text-lg shadow-xl shadow-harmony-medium/20 relative overflow-hidden group"
               >
-                Automate Your Growth
+                <span className="relative z-10">Begin Your Automation Journey</span>
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <RippleBackground intensity="strong" />
+                </div>
               </Button>
             </div>
           </div>
