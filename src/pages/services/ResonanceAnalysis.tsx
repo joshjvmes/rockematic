@@ -4,15 +4,21 @@ import NavigationHeader from '@/components/NavigationHeader';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import RippleBackground from '@/components/RippleBackground';
-import { Target, BarChart3, Check } from 'lucide-react';
+import { Target, BarChart3, Check, Waves, LineChart } from 'lucide-react';
+import { Card } from '@/components/ui/card';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from '@/components/ui/breadcrumb';
+import AnimatedText from '@/components/AnimatedText';
 
 const ResonanceAnalysis = () => {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-gradient-to-b from-white to-harmony-light/5">
       <NavigationHeader />
       
-      <main className="pt-32 pb-20">
+      <main className="pt-32 pb-20 relative">
+        <div className="absolute inset-0 pointer-events-none">
+          <RippleBackground intensity="soft" color="rgba(155, 135, 245, 0.03)" />
+        </div>
+
         <div className="container mx-auto px-6">
           <Breadcrumb>
             <BreadcrumbList>
@@ -27,87 +33,139 @@ const ResonanceAnalysis = () => {
           </Breadcrumb>
 
           <div className="max-w-4xl mx-auto">
-            <div className="mb-12 text-center">
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-harmony-light/10 mb-6">
-                <Target className="h-8 w-8 text-harmony-medium" />
+            <div className="mb-16 text-center relative">
+              <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-harmony-light/10 mb-8 relative">
+                <Target className="h-10 w-10 text-harmony-medium" />
+                <div className="absolute inset-0">
+                  <RippleBackground intensity="medium" />
+                </div>
               </div>
-              <h1 className="text-4xl md:text-5xl font-serif font-bold mb-6">
-                Resonance Analysis
-              </h1>
-              <p className="text-xl text-muted-foreground">
-                Discover your business's natural frequency and identify perfect resonant points for exponential growth.
-              </p>
-            </div>
-
-            <div className="prose prose-lg max-w-none mb-12">
-              <p>
-                Our signature Resonance Analysis process delves deep into your business's core operations, 
-                identifying natural amplification points where minimal input can create maximum output.
-              </p>
               
-              <h2>The Analysis Process</h2>
-              <ul>
-                <li>Deep-dive assessment of current operations</li>
-                <li>Identification of natural growth catalysts</li>
-                <li>Mapping of resonant opportunities</li>
-                <li>Strategic amplification planning</li>
-              </ul>
-
-              <h2>Expected Outcomes</h2>
-              <p>
-                Through our Resonance Analysis, you'll gain clear insights into:
+              <AnimatedText
+                text="Resonance Analysis"
+                className="text-4xl md:text-5xl font-serif font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-harmony-medium to-harmony-light"
+                animationType="reveal"
+                staggerDelay={0.05}
+              />
+              
+              <p className="text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto">
+                Discover the natural frequencies of your business, where minimal input creates 
+                maximum impact through perfectly tuned strategic resonance.
               </p>
-              <ul>
-                <li>Prime amplification points in your business</li>
-                <li>Natural growth patterns and cycles</li>
-                <li>Efficiency optimization opportunities</li>
-                <li>Strategic leverage points</li>
-              </ul>
             </div>
 
-            <div className="bg-harmony-deep text-white rounded-2xl p-8 mb-12">
-              <h3 className="text-2xl font-serif font-semibold mb-4">
-                Why Choose Resonance Analysis?
-              </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="flex items-start space-x-3">
-                  <Check className="h-5 w-5 text-harmony-light mt-1" />
-                  <div>
-                    <h4 className="font-medium mb-2">Precise Insights</h4>
-                    <p className="text-white/80">Gain detailed understanding of your growth potential</p>
+            <div className="space-y-16">
+              <section className="prose prose-lg max-w-none">
+                <div className="bg-white/50 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-harmony-light/10">
+                  <h2 className="font-serif text-3xl mb-6 text-harmony-deep">The Resonance Journey</h2>
+                  <p className="text-lg leading-relaxed mb-8">
+                    Like a master violinist finding the perfect note that makes a crystal sing, 
+                    our Resonance Analysis reveals the precise frequencies where your business naturally 
+                    amplifies effort into extraordinary results.
+                  </p>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6 not-prose">
+                    <Card className="p-6 bg-resonance-water/20 border-resonance-water/30">
+                      <Waves className="h-6 w-6 text-harmony-medium mb-4" />
+                      <h3 className="font-medium text-lg mb-2">Natural Rhythms</h3>
+                      <p className="text-muted-foreground">Discover your business's inherent growth patterns</p>
+                    </Card>
+                    
+                    <Card className="p-6 bg-resonance-forest/20 border-resonance-forest/30">
+                      <LineChart className="h-6 w-6 text-harmony-medium mb-4" />
+                      <h3 className="font-medium text-lg mb-2">Peak Amplification</h3>
+                      <p className="text-muted-foreground">Identify optimal resonance points</p>
+                    </Card>
+                    
+                    <Card className="p-6 bg-resonance-sunset/20 border-resonance-sunset/30">
+                      <BarChart3 className="h-6 w-6 text-harmony-medium mb-4" />
+                      <h3 className="font-medium text-lg mb-2">Strategic Harmony</h3>
+                      <p className="text-muted-foreground">Align actions with natural momentum</p>
+                    </Card>
                   </div>
                 </div>
-                <div className="flex items-start space-x-3">
-                  <Check className="h-5 w-5 text-harmony-light mt-1" />
-                  <div>
-                    <h4 className="font-medium mb-2">Strategic Clarity</h4>
-                    <p className="text-white/80">Clear path to amplified growth</p>
+              </section>
+
+              <section className="bg-harmony-deep text-white rounded-2xl p-8 shadow-xl relative overflow-hidden">
+                <div className="absolute inset-0 opacity-10">
+                  <RippleBackground intensity="strong" color="rgba(255, 255, 255, 0.1)" />
+                </div>
+                
+                <div className="relative">
+                  <h3 className="text-2xl font-serif font-semibold mb-8">
+                    The Analysis Process
+                  </h3>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div className="space-y-6">
+                      <div className="flex items-start space-x-4">
+                        <div className="flex-shrink-0 w-8 h-8 rounded-full bg-harmony-light/20 flex items-center justify-center">
+                          <Check className="h-4 w-4 text-harmony-light" />
+                        </div>
+                        <div>
+                          <h4 className="font-medium text-xl mb-2">Deep Observation</h4>
+                          <p className="text-white/80 leading-relaxed">
+                            Like studying the ripples in a pond, we observe how energy moves through your organization.
+                          </p>
+                        </div>
+                      </div>
+                      
+                      <div className="flex items-start space-x-4">
+                        <div className="flex-shrink-0 w-8 h-8 rounded-full bg-harmony-light/20 flex items-center justify-center">
+                          <Check className="h-4 w-4 text-harmony-light" />
+                        </div>
+                        <div>
+                          <h4 className="font-medium text-xl mb-2">Pattern Recognition</h4>
+                          <p className="text-white/80 leading-relaxed">
+                            We identify the natural cycles and rhythms unique to your business ecosystem.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="space-y-6">
+                      <div className="flex items-start space-x-4">
+                        <div className="flex-shrink-0 w-8 h-8 rounded-full bg-harmony-light/20 flex items-center justify-center">
+                          <Check className="h-4 w-4 text-harmony-light" />
+                        </div>
+                        <div>
+                          <h4 className="font-medium text-xl mb-2">Resonance Mapping</h4>
+                          <p className="text-white/80 leading-relaxed">
+                            Chart the points where minimal input creates maximum amplification.
+                          </p>
+                        </div>
+                      </div>
+                      
+                      <div className="flex items-start space-x-4">
+                        <div className="flex-shrink-0 w-8 h-8 rounded-full bg-harmony-light/20 flex items-center justify-center">
+                          <Check className="h-4 w-4 text-harmony-light" />
+                        </div>
+                        <div>
+                          <h4 className="font-medium text-xl mb-2">Strategic Attunement</h4>
+                          <p className="text-white/80 leading-relaxed">
+                            Align your actions with these natural amplification points for effortless growth.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
-                <div className="flex items-start space-x-3">
-                  <Check className="h-5 w-5 text-harmony-light mt-1" />
-                  <div>
-                    <h4 className="font-medium mb-2">Efficiency Focus</h4>
-                    <p className="text-white/80">Maximize impact with minimal input</p>
+              </section>
+
+              <div className="text-center space-y-6">
+                <p className="text-lg text-muted-foreground italic">
+                  "In nature, nothing is wasted. The secret is finding where energy naturally wants to flow."
+                </p>
+                <Button 
+                  size="lg"
+                  className="bg-harmony-medium hover:bg-harmony-light text-white rounded-full px-12 py-6 text-lg shadow-xl shadow-harmony-medium/20 relative overflow-hidden group"
+                >
+                  <span className="relative z-10">Begin Your Analysis Journey</span>
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <RippleBackground intensity="strong" />
                   </div>
-                </div>
-                <div className="flex items-start space-x-3">
-                  <Check className="h-5 w-5 text-harmony-light mt-1" />
-                  <div>
-                    <h4 className="font-medium mb-2">Long-term Value</h4>
-                    <p className="text-white/80">Sustainable growth strategies</p>
-                  </div>
-                </div>
+                </Button>
               </div>
-            </div>
-
-            <div className="text-center">
-              <Button 
-                size="lg"
-                className="bg-harmony-medium hover:bg-harmony-light text-white rounded-full px-8"
-              >
-                Schedule Your Analysis
-              </Button>
             </div>
           </div>
         </div>
