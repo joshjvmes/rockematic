@@ -22,6 +22,8 @@ import HarmonyIntegration from "./pages/services/HarmonyIntegration";
 import FlowAutomation from "./pages/services/FlowAutomation";
 import ResonantLeadership from "./pages/services/ResonantLeadership";
 import HarmonicGrowthSystem from "./pages/services/HarmonicGrowthSystem";
+import Terms from "./pages/Terms";
+import Privacy from "./pages/Privacy";
 
 const queryClient = new QueryClient();
 
@@ -62,6 +64,8 @@ const App = () => (
               </AdminRoute>
             } />
             
+            <Route path="/terms" element={<Terms />} />
+            <Route path="/privacy" element={<Privacy />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
