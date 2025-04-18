@@ -112,7 +112,7 @@ const Index = () => {
       <section ref={firstSectionRef} className="py-20 md:py-32 bg-harmony-deep text-white relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <img 
-            src="/placeholder.svg" 
+            src="/rockematic-kael-1.png" 
             alt="Water Ripple Effect" 
             className="w-full h-full object-cover"
           />
@@ -203,7 +203,10 @@ const Index = () => {
       {/* Selective Harmony Section */}
       <section className="py-20 md:py-32 bg-gradient-to-br from-harmony-deep to-harmony-medium text-white relative overflow-hidden">
         <div className="absolute inset-0 opacity-5">
-          <div className="h-full w-full bg-[url('/rockematic-kael-3.png')] bg-cover bg-center" />
+          <div 
+            className="h-full w-full bg-cover bg-center" 
+            style={{ backgroundImage: "url('/rockematic-kael-3.png')" }}
+          />
         </div>
         
         <div className="container mx-auto px-6 relative z-10">
