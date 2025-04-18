@@ -6,12 +6,14 @@ interface RippleBackgroundProps {
   className?: string;
   intensity?: 'soft' | 'medium' | 'strong';
   color?: string;
+  backgroundImage?: string;  // New optional prop for custom background
 }
 
 const RippleBackground: React.FC<RippleBackgroundProps> = ({ 
   className, 
   intensity = 'medium',
-  color = 'rgba(155, 135, 245, 0.05)'
+  color = 'rgba(155, 135, 245, 0.05)',
+  backgroundImage  // New prop
 }) => {
   const intensityConfig = {
     soft: { count: 3, opacity: 0.03 },
@@ -45,7 +47,14 @@ const RippleBackground: React.FC<RippleBackgroundProps> = ({
   });
   
   return (
-    <div className={cn('relative w-full h-full overflow-hidden', className)}>
+    <div 
+      className={cn('relative w-full h-full overflow-hidden', className)}
+      style={backgroundImage ? { 
+        backgroundImage: `url('${backgroundImage}')`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center'
+      } : {}}
+    >
       {ripples}
     </div>
   );

@@ -88,7 +88,7 @@ const Services = () => {
       <section className="py-16 md:py-24 bg-harmony-deep text-white relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <img 
-            src="/ripple.jpg" 
+            src="/rockematic-kael-2.png" 
             alt="Water Ripple Effect" 
             className="w-full h-full object-cover"
           />
@@ -329,7 +329,10 @@ const Services = () => {
       {/* CTA */}
       <section className="py-20 md:py-32 bg-gradient-to-br from-harmony-deep to-harmony-medium text-white relative overflow-hidden">
         <div className="absolute inset-0 opacity-5">
-          <div className="h-full w-full bg-[url('/ripple.jpg')] bg-cover bg-center" />
+          <div 
+            className="h-full w-full bg-cover bg-center" 
+            style={{ backgroundImage: "url('/rockematic-kael-4.png')" }}
+          />
         </div>
         
         <div className="container mx-auto px-6 relative z-10 text-center">
