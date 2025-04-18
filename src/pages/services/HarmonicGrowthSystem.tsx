@@ -6,13 +6,19 @@ import { Button } from '@/components/ui/button';
 import RippleBackground from '@/components/RippleBackground';
 import { Wand2, ArrowRight, Check } from 'lucide-react';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from '@/components/ui/breadcrumb';
+import AnimatedText from '@/components/AnimatedText';
+import HarmonicCard from '@/components/HarmonicCard';
 
 const HarmonicGrowthSystem = () => {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-gradient-to-b from-white to-harmony-light/5 relative overflow-hidden">
       <NavigationHeader />
       
-      <main className="pt-32 pb-20">
+      <main className="pt-32 pb-20 relative">
+        <div className="absolute inset-0 pointer-events-none">
+          <RippleBackground intensity="soft" color="rgba(155, 135, 245, 0.03)" />
+        </div>
+
         <div className="container mx-auto px-6">
           <Breadcrumb>
             <BreadcrumbList>
@@ -27,27 +33,40 @@ const HarmonicGrowthSystem = () => {
           </Breadcrumb>
 
           <div className="max-w-4xl mx-auto">
-            <div className="mb-12 text-center">
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-harmony-light/10 mb-6">
-                <Wand2 className="h-8 w-8 text-harmony-medium" />
+            <div className="text-center mb-16 relative">
+              <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-harmony-light/10 mb-8 relative">
+                <Wand2 className="h-10 w-10 text-harmony-medium z-10" />
+                <div className="absolute inset-0">
+                  <RippleBackground intensity="medium" />
+                </div>
               </div>
-              <h1 className="text-4xl md:text-5xl font-serif font-bold mb-6">
-                The Harmonic Growth System
-              </h1>
-              <p className="text-xl text-muted-foreground">
+              
+              <AnimatedText
+                text="The Harmonic Growth System"
+                className="text-4xl md:text-5xl font-serif font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-harmony-medium to-harmony-light"
+                animationType="reveal"
+                staggerDelay={0.05}
+              />
+              
+              <p className="text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto">
                 A complete symphony of growth methodologies, perfectly orchestrated to create exponential success with natural momentum.
               </p>
             </div>
 
             <div className="prose prose-lg max-w-none mb-12">
-              <p className="lead">
+              <p className="lead text-lg text-muted-foreground">
                 Our signature end-to-end solution orchestrates all elements of your business into 
                 a perfectly tuned growth engine. This comprehensive system integrates all our 
                 methodologies into a bespoke symphony of success tailored to your unique business rhythm.
               </p>
+            </div>
+
+            <section className="mb-16">
+              <h2 className="font-serif text-3xl mb-8 text-harmony-deep text-center">
+                The Complete Symphony
+              </h2>
               
-              <h2>The Complete Symphony</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 not-prose mb-12">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {[
                   {
                     title: "Resonance Analysis",
@@ -80,63 +99,86 @@ const HarmonicGrowthSystem = () => {
                     link: "/services/resonant-leadership"
                   }
                 ].map((service) => (
-                  <a 
+                  <HarmonicCard
                     key={service.title}
-                    href={service.link}
-                    className="block p-6 bg-harmony-deep/5 hover:bg-harmony-deep/10 rounded-xl transition-colors"
-                  >
-                    <h3 className="text-xl font-medium mb-2">{service.title}</h3>
-                    <p className="text-muted-foreground mb-4">{service.description}</p>
-                    <div className="flex items-center text-harmony-medium">
-                      <span className="text-sm">Learn more</span>
-                      <ArrowRight className="h-4 w-4 ml-2" />
-                    </div>
-                  </a>
+                    title={service.title}
+                    description={service.description}
+                    icon={<ArrowRight className="h-6 w-6 text-harmony-medium" />}
+                    color="water"
+                    className="hover:translate-y-[-5px] transition-transform duration-300"
+                  />
                 ))}
               </div>
+            </section>
 
-              <h2>The Harmonic Difference</h2>
-              <div className="bg-harmony-deep text-white rounded-2xl p-8 not-prose mb-12">
+            <section className="bg-white/50 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-harmony-light/10 mb-16 relative overflow-hidden">
+              <div className="absolute inset-0 opacity-10">
+                <RippleBackground intensity="soft" />
+              </div>
+              
+              <div className="relative">
+                <h2 className="text-2xl font-serif font-semibold mb-8 text-center">
+                  The Harmonic Difference
+                </h2>
+                
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="flex items-start space-x-3">
-                    <Check className="h-5 w-5 text-harmony-light mt-1" />
+                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-harmony-light/20 flex items-center justify-center">
+                      <Check className="h-4 w-4 text-harmony-medium" />
+                    </div>
                     <div>
-                      <h4 className="font-medium mb-2">Complete Integration</h4>
-                      <p className="text-white/80">Every element works in perfect harmony</p>
+                      <h4 className="font-medium text-xl mb-2">Complete Integration</h4>
+                      <p className="text-muted-foreground">Every element works in perfect harmony</p>
                     </div>
                   </div>
+                  
                   <div className="flex items-start space-x-3">
-                    <Check className="h-5 w-5 text-harmony-light mt-1" />
+                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-harmony-light/20 flex items-center justify-center">
+                      <Check className="h-4 w-4 text-harmony-medium" />
+                    </div>
                     <div>
-                      <h4 className="font-medium mb-2">Natural Amplification</h4>
-                      <p className="text-white/80">Growth that builds its own momentum</p>
+                      <h4 className="font-medium text-xl mb-2">Natural Amplification</h4>
+                      <p className="text-muted-foreground">Growth that builds its own momentum</p>
                     </div>
                   </div>
+                  
                   <div className="flex items-start space-x-3">
-                    <Check className="h-5 w-5 text-harmony-light mt-1" />
+                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-harmony-light/20 flex items-center justify-center">
+                      <Check className="h-4 w-4 text-harmony-medium" />
+                    </div>
                     <div>
-                      <h4 className="font-medium mb-2">Sustained Results</h4>
-                      <p className="text-white/80">Long-term, compounding success</p>
+                      <h4 className="font-medium text-xl mb-2">Sustained Results</h4>
+                      <p className="text-muted-foreground">Long-term, compounding success</p>
                     </div>
                   </div>
+                  
                   <div className="flex items-start space-x-3">
-                    <Check className="h-5 w-5 text-harmony-light mt-1" />
+                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-harmony-light/20 flex items-center justify-center">
+                      <Check className="h-4 w-4 text-harmony-medium" />
+                    </div>
                     <div>
-                      <h4 className="font-medium mb-2">Bespoke Design</h4>
-                      <p className="text-white/80">Tailored to your unique rhythm</p>
+                      <h4 className="font-medium text-xl mb-2">Bespoke Design</h4>
+                      <p className="text-muted-foreground">Tailored to your unique rhythm</p>
                     </div>
                   </div>
                 </div>
               </div>
+            </section>
 
-              <div className="text-center not-prose">
-                <Button 
-                  size="lg"
-                  className="bg-harmony-medium hover:bg-harmony-light text-white rounded-full px-8"
-                >
-                  Begin Your Harmonic Journey
-                </Button>
-              </div>
+            <div className="text-center">
+              <p className="text-lg text-muted-foreground italic mb-8">
+                "True harmony emerges when every part knows its role in the greater symphony."
+              </p>
+              
+              <Button 
+                size="lg"
+                className="bg-harmony-medium hover:bg-harmony-light text-white rounded-full px-12 py-6 text-lg shadow-xl shadow-harmony-medium/20 relative overflow-hidden group"
+              >
+                <span className="relative z-10">Begin Your Harmonic Journey</span>
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <RippleBackground intensity="strong" />
+                </div>
+              </Button>
             </div>
           </div>
         </div>
