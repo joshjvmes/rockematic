@@ -21,6 +21,7 @@ import MomentumOrchestration from "./pages/services/MomentumOrchestration";
 import HarmonyIntegration from "./pages/services/HarmonyIntegration";
 import FlowAutomation from "./pages/services/FlowAutomation";
 import ResonantLeadership from "./pages/services/ResonantLeadership";
+import HarmonicGrowthSystem from "./pages/services/HarmonicGrowthSystem";
 
 const queryClient = new QueryClient();
 
@@ -41,6 +42,7 @@ const App = () => (
             <Route path="/services/harmony-integration" element={<HarmonyIntegration />} />
             <Route path="/services/flow-automation" element={<FlowAutomation />} />
             <Route path="/services/resonant-leadership" element={<ResonantLeadership />} />
+            <Route path="/services/harmonic-growth-system" element={<HarmonicGrowthSystem />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/auth" element={<AuthPage />} />
             
