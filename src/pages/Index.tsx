@@ -1,5 +1,6 @@
 
 import React, { useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { ChevronDown, BarChart3, Zap, ChevronsUp, Users } from 'lucide-react';
 import NavigationHeader from '@/components/NavigationHeader';
@@ -7,12 +8,23 @@ import Footer from '@/components/Footer';
 import HarmonicCard from '@/components/HarmonicCard';
 import AnimatedText from '@/components/AnimatedText';
 import RippleBackground from '@/components/RippleBackground';
+import { useAuth } from '@/context/AuthContext';
 
 const Index = () => {
   const firstSectionRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
+  const { user } = useAuth();
 
   const scrollToFirstSection = () => {
     firstSectionRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const handleJoinClick = () => {
+    if (user) {
+      navigate('/apply');
+    } else {
+      navigate('/auth', { state: { action: 'signup' } });
+    }
   };
 
   return (
@@ -68,13 +80,15 @@ const Index = () => {
               <Button 
                 size="lg" 
                 className="bg-harmony-medium hover:bg-harmony-light text-white font-medium rounded-full px-8"
+                onClick={handleJoinClick}
               >
-                Join the Symphony
+                {user ? 'Apply Now' : 'Join the Symphony'}
               </Button>
               <Button 
                 variant="outline" 
                 size="lg" 
                 className="border-harmony-medium text-harmony-medium hover:bg-harmony-light/10 rounded-full px-8"
+                onClick={() => navigate('/philosophy')}
               >
                 Our Philosophy
               </Button>
@@ -236,6 +250,7 @@ const Index = () => {
               </p>
               <Button 
                 className="bg-white text-harmony-deep hover:bg-harmony-accent hover:text-harmony-deep rounded-full px-8"
+                onClick={handleJoinClick}
               >
                 Apply for Partnership
               </Button>
@@ -264,6 +279,7 @@ const Index = () => {
             <Button 
               size="lg" 
               className="bg-harmony-medium hover:bg-harmony-light text-white font-medium rounded-full px-10 py-6 text-lg"
+              onClick={handleJoinClick}
             >
               Start Your Harmonic Journey
             </Button>

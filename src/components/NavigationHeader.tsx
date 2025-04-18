@@ -1,13 +1,25 @@
 
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, User, LogOut } from 'lucide-react';
+import { useAuth } from '@/context/AuthContext';
+import { 
+  DropdownMenu, 
+  DropdownMenuContent, 
+  DropdownMenuItem, 
+  DropdownMenuLabel, 
+  DropdownMenuSeparator, 
+  DropdownMenuTrigger 
+} from '@/components/ui/dropdown-menu';
+import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 
 const NavigationHeader: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { user, signOut, isAdmin } = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,6 +32,20 @@ const NavigationHeader: React.FC = () => {
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
+  const handleSignOut = async () => {
+    await signOut();
+    navigate('/');
+  };
+
+  const getInitials = (name: string) => {
+    return name
+      .split(' ')
+      .map(part => part[0])
+      .join('')
+      .toUpperCase()
+      .substring(0, 2);
   };
 
   return (
@@ -54,9 +80,49 @@ const NavigationHeader: React.FC = () => {
           <Link to="/contact" className="text-foreground/80 hover:text-foreground transition-colors">
             Contact
           </Link>
-          <Button className="bg-harmony-medium hover:bg-harmony-light text-white">
-            Join the Symphony
-          </Button>
+          
+          {user ? (
+            <>
+              <Link to="/apply" className="text-foreground/80 hover:text-foreground transition-colors">
+                Apply
+              </Link>
+              {isAdmin && (
+                <Link to="/admin" className="text-foreground/80 hover:text-foreground transition-colors">
+                  Admin
+                </Link>
+              )}
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Avatar className="cursor-pointer h-9 w-9 hover:ring-2 hover:ring-harmony-light transition-all">
+                    <AvatarFallback className="bg-harmony-medium text-white">
+                      {user.user_metadata.full_name 
+                        ? getInitials(user.user_metadata.full_name) 
+                        : user.email?.substring(0, 2).toUpperCase() || 'U'}
+                    </AvatarFallback>
+                  </Avatar>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={() => navigate('/dashboard')}>
+                    <User className="mr-2 h-4 w-4" />
+                    Dashboard
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={handleSignOut}>
+                    <LogOut className="mr-2 h-4 w-4" />
+                    Sign out
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </>
+          ) : (
+            <Button
+              className="bg-harmony-medium hover:bg-harmony-light text-white"
+              onClick={() => navigate('/auth')}
+            >
+              Sign In
+            </Button>
+          )}
         </nav>
 
         {/* Mobile Menu Button */}
@@ -106,12 +172,53 @@ const NavigationHeader: React.FC = () => {
           >
             Contact
           </Link>
-          <Button 
-            className="mt-4 bg-harmony-medium hover:bg-harmony-light text-white"
-            onClick={() => setIsMobileMenuOpen(false)}
-          >
-            Join the Symphony
-          </Button>
+          
+          {user ? (
+            <>
+              <Link 
+                to="/apply" 
+                className="text-xl text-foreground py-2 border-b border-border"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Apply
+              </Link>
+              {isAdmin && (
+                <Link 
+                  to="/admin" 
+                  className="text-xl text-foreground py-2 border-b border-border"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Admin
+                </Link>
+              )}
+              <Link 
+                to="/dashboard" 
+                className="text-xl text-foreground py-2 border-b border-border"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Dashboard
+              </Link>
+              <Button 
+                onClick={() => {
+                  handleSignOut();
+                  setIsMobileMenuOpen(false);
+                }}
+                className="mt-4 bg-harmony-medium hover:bg-harmony-light text-white"
+              >
+                Sign Out
+              </Button>
+            </>
+          ) : (
+            <Button 
+              onClick={() => {
+                navigate('/auth');
+                setIsMobileMenuOpen(false);
+              }}
+              className="mt-4 bg-harmony-medium hover:bg-harmony-light text-white"
+            >
+              Sign In
+            </Button>
+          )}
         </nav>
       </div>
     </header>
