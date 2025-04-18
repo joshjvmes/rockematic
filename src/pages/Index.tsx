@@ -215,8 +215,8 @@ const Index = () => {
               <div className="relative">
                 <div className="relative h-96 w-full rounded-2xl overflow-hidden">
                   <img 
-                    src="/cascade.jpg" 
-                    alt="Cascading Waterfall" 
+                    src="/rockematic-kael-5.png" 
+                    alt="Harmonic Growth Visualization" 
                     className="h-full w-full object-cover"
                     onError={(e) => {
                       const target = e.target as HTMLImageElement;
