@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import RippleBackground from '@/components/RippleBackground';
 import AnimatedText from '@/components/AnimatedText';
 import HarmonicCard from '@/components/HarmonicCard';
-import { LineChart, Target, Layers, Zap, Star, Compass } from 'lucide-react';
+import { LineChart, Target, Layers, Zap, Star, Compass, Sparkles } from 'lucide-react';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from '@/components/ui/breadcrumb';
 
 const GrowthAmplification = () => {
@@ -60,10 +60,11 @@ const GrowthAmplification = () => {
                 </h2>
                 
                 <div className="prose prose-lg max-w-none mb-8">
-                  <p>
-                    Growth isn't just about scaling—it's about discovering the hidden frequencies 
-                    where your business's unique potential can resonate most powerfully. Our Growth 
-                    Amplification service is a quantum approach to business evolution.
+                  <p className="text-lg leading-relaxed">
+                    In nature's grand design, a single drop creates ripples that transform entire waters. 
+                    So too in business, we discover the precise frequencies where minimal input yields 
+                    maximum impact. This is not mere scaling—it's the art of finding your enterprise's 
+                    natural resonance points where growth becomes not just possible, but inevitable.
                   </p>
                 </div>
 
@@ -104,40 +105,68 @@ const GrowthAmplification = () => {
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div className="space-y-6">
-                    <div className="flex items-start space-x-4">
-                      <div className="flex-shrink-0 w-8 h-8 rounded-full bg-harmony-light/20 flex items-center justify-center">
-                        <Compass className="h-4 w-4 text-harmony-light" />
+                    <div className="flex items-start space-x-4 group">
+                      <div className="flex-shrink-0 w-8 h-8 rounded-full bg-harmony-light/20 flex items-center justify-center relative overflow-hidden">
+                        <Compass className="h-4 w-4 text-harmony-light relative z-10" />
+                        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity">
+                          <RippleBackground intensity="medium" />
+                        </div>
                       </div>
                       <div>
                         <h4 className="font-medium text-xl mb-2">Resonance Mapping</h4>
                         <p className="text-white/80 leading-relaxed">
-                          We decode your business's unique harmonic signature, revealing hidden potential.
+                          Like finding the perfect note that makes a crystal sing, we decode your 
+                          business's unique harmonic signature, revealing hidden amplification points.
                         </p>
                       </div>
                     </div>
                     
-                    <div className="flex items-start space-x-4">
-                      <div className="flex-shrink-0 w-8 h-8 rounded-full bg-harmony-light/20 flex items-center justify-center">
-                        <Layers className="h-4 w-4 text-harmony-light" />
+                    <div className="flex items-start space-x-4 group">
+                      <div className="flex-shrink-0 w-8 h-8 rounded-full bg-harmony-light/20 flex items-center justify-center relative overflow-hidden">
+                        <Layers className="h-4 w-4 text-harmony-light relative z-10" />
+                        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity">
+                          <RippleBackground intensity="medium" />
+                        </div>
                       </div>
                       <div>
                         <h4 className="font-medium text-xl mb-2">Strategic Calibration</h4>
                         <p className="text-white/80 leading-relaxed">
-                          Precision interventions designed to trigger exponential growth cascades.
+                          Precise interventions designed to trigger exponential growth cascades,
+                          where each success naturally amplifies the next.
                         </p>
                       </div>
                     </div>
                   </div>
 
                   <div className="space-y-6">
-                    <div className="flex items-start space-x-4">
-                      <div className="flex-shrink-0 w-8 h-8 rounded-full bg-harmony-light/20 flex items-center justify-center">
-                        <Star className="h-4 w-4 text-harmony-light" />
+                    <div className="flex items-start space-x-4 group">
+                      <div className="flex-shrink-0 w-8 h-8 rounded-full bg-harmony-light/20 flex items-center justify-center relative overflow-hidden">
+                        <Star className="h-4 w-4 text-harmony-light relative z-10" />
+                        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity">
+                          <RippleBackground intensity="medium" />
+                        </div>
                       </div>
                       <div>
                         <h4 className="font-medium text-xl mb-2">Momentum Architecture</h4>
                         <p className="text-white/80 leading-relaxed">
-                          Engineering growth systems that generate increasing returns with decreasing effort.
+                          Engineering growth systems that generate increasing returns with 
+                          decreasing effort, like a perpetual motion machine of success.
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start space-x-4 group">
+                      <div className="flex-shrink-0 w-8 h-8 rounded-full bg-harmony-light/20 flex items-center justify-center relative overflow-hidden">
+                        <Sparkles className="h-4 w-4 text-harmony-light relative z-10" />
+                        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity">
+                          <RippleBackground intensity="medium" />
+                        </div>
+                      </div>
+                      <div>
+                        <h4 className="font-medium text-xl mb-2">Resonant Mastery</h4>
+                        <p className="text-white/80 leading-relaxed">
+                          Achieve a state where growth becomes effortless, as natural as 
+                          waves building upon themselves in perfect harmony.
                         </p>
                       </div>
                     </div>
@@ -170,3 +199,4 @@ const GrowthAmplification = () => {
 };
 
 export default GrowthAmplification;
+
