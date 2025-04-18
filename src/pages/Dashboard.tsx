@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { 
@@ -17,6 +16,7 @@ import Footer from '@/components/Footer';
 import { useAuth } from '@/context/AuthContext';
 import { supabase } from '@/integrations/supabase/client';
 import { Loader2, ArrowRight, FileText, MessageSquare } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 const Dashboard = () => {
   const { user } = useAuth();
