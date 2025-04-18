@@ -29,17 +29,55 @@ const Application = () => {
     applicationDetails: '',
   });
   const [loading, setLoading] = useState(false);
+  const [hasExistingApplication, setHasExistingApplication] = useState(false);
+  const [checkingApplication, setCheckingApplication] = useState(true);
 
   useEffect(() => {
+    // First check if user already has an application
+    const checkExistingApplication = async () => {
+      if (!user) return;
+      
+      try {
+        setCheckingApplication(true);
+        const { data, error } = await supabase
+          .from('applications')
+          .select('id, status')
+          .eq('user_id', user.id);
+          
+        if (error) throw error;
+        
+        if (data && data.length > 0) {
+          setHasExistingApplication(true);
+          toast({
+            title: "Application Already Exists",
+            description: "You already have an application in our system. Check its status on your dashboard.",
+          });
+          // Short delay before redirecting to dashboard
+          setTimeout(() => navigate('/dashboard'), 2000);
+        }
+      } catch (error) {
+        console.error('Error checking application status:', error);
+      } finally {
+        setCheckingApplication(false);
+      }
+    };
+    
+    checkExistingApplication();
+    
+    // Then set form data from location state
     if (location.state && location.state.selectedTier && location.state.priceId) {
       setSelectedTier(location.state.selectedTier);
       setPriceId(location.state.priceId);
       setFormData(prev => ({ ...prev, email: user?.email || '' }));
     } else {
       // Redirect to services page if no tier is selected
+      toast({
+        title: "Tier Selection Required",
+        description: "Please select a membership tier before applying.",
+      });
       navigate('/services');
     }
-  }, [location.state, navigate, user?.email]);
+  }, [location.state, navigate, user, toast]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -107,8 +145,61 @@ const Application = () => {
     }
   };
 
+  if (checkingApplication) {
+    return (
+      <div className="min-h-screen bg-gray-100">
+        <NavigationHeader />
+        <main className="container mx-auto py-12 px-4 flex items-center justify-center">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-harmony-medium mx-auto mb-4"></div>
+            <p>Checking application status...</p>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+
+  if (hasExistingApplication) {
+    return (
+      <div className="min-h-screen bg-gray-100">
+        <NavigationHeader />
+        <main className="container mx-auto py-12 px-4">
+          <div className="max-w-lg mx-auto bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 text-center">
+            <h2 className="text-2xl font-semibold mb-4">Application Already Exists</h2>
+            <p className="mb-6">You already have an application in our system. Redirecting to your dashboard...</p>
+            <Button 
+              onClick={() => navigate('/dashboard')}
+              className="bg-harmony-medium hover:bg-harmony-light text-white"
+            >
+              Go to Dashboard
+            </Button>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+
   if (!selectedTier) {
-    return <div>Loading...</div>; // Or a more appropriate loading state
+    return (
+      <div className="min-h-screen bg-gray-100">
+        <NavigationHeader />
+        <main className="container mx-auto py-12 px-4">
+          <div className="max-w-lg mx-auto bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 text-center">
+            <h2 className="text-2xl font-semibold mb-4">Select a Tier</h2>
+            <p className="mb-6">Please select a membership tier before applying.</p>
+            <Button 
+              onClick={() => navigate('/services')}
+              className="bg-harmony-medium hover:bg-harmony-light text-white"
+            >
+              View Membership Tiers
+            </Button>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
   }
 
   return (

@@ -114,6 +114,10 @@ const Dashboard = () => {
     }
   };
 
+  const handleApplyClick = () => {
+    navigate('/services');  // Redirect to services page to select a tier
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen flex flex-col">
@@ -206,7 +210,7 @@ const Dashboard = () => {
                   </CardContent>
                   <CardFooter>
                     <Button 
-                      onClick={() => navigate('/apply')}
+                      onClick={handleApplyClick}
                       className="bg-harmony-medium hover:bg-harmony-light text-white"
                     >
                       Apply Now
@@ -267,7 +271,7 @@ const Dashboard = () => {
                   </CardContent>
                   <CardFooter>
                     <Button 
-                      onClick={() => navigate('/apply')}
+                      onClick={handleApplyClick}
                       className="bg-harmony-medium hover:bg-harmony-light text-white"
                     >
                       Apply Now

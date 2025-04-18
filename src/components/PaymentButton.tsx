@@ -28,27 +28,27 @@ export const PaymentButton = ({ priceId, mode, className, children, tier }: Paym
         variant: "destructive",
       });
       // Redirect to auth page with a return destination
-      navigate("/auth", { state: { returnTo: "/apply", mode: "signup" } });
+      navigate("/auth", { state: { returnTo: "/services", mode: "signup" } });
       return;
     }
 
     setLoading(true);
 
     try {
-      // Check if user already has an application
+      // Check if user already has an application - use maybeSingle() instead of single()
       const { data: existingApplications, error: fetchError } = await supabase
         .from('applications')
         .select('id, status')
-        .eq('user_id', user.id)
-        .single();
+        .eq('user_id', user.id);
 
-      if (fetchError && fetchError.code !== 'PGSQL_NO_ROWS_RETURNED') {
+      if (fetchError) {
         throw fetchError;
       }
 
-      if (existingApplications) {
+      if (existingApplications && existingApplications.length > 0) {
         // User has an existing application
-        if (existingApplications.status === 'approved') {
+        const application = existingApplications[0];
+        if (application.status === 'approved') {
           // If approved, proceed to payment
           redirectToPayment();
         } else {
