@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import NavigationHeader from '@/components/NavigationHeader';
 import Footer from '@/components/Footer';
 import AnimatedText from '@/components/AnimatedText';
@@ -7,6 +8,8 @@ import { Button } from '@/components/ui/button';
 import { Wand2, Sparkles, Lightbulb, Music } from 'lucide-react';
 
 const Philosophy = () => {
+  const navigate = useNavigate();
+
   useEffect(() => {
     // Update metadata when component mounts
     document.title = "Our Philosophy | RocketNow";
@@ -15,6 +18,10 @@ const Philosophy = () => {
       metaDescription.setAttribute('content', 'Discover RocketNow\'s unique philosophy of business growth through resonance, harmony, and natural amplification. Join our selective ensemble of success.');
     }
   }, []);
+
+  const handleApplyClick = () => {
+    navigate('/apply');
+  };
 
   return (
     <div className="min-h-screen">
@@ -141,6 +148,7 @@ const Philosophy = () => {
                 </ul>
                 <Button 
                   className="bg-white text-harmony-deep hover:bg-harmony-accent hover:text-harmony-deep w-full"
+                  onClick={handleApplyClick}
                 >
                   Apply for Partnership
                 </Button>
@@ -175,6 +183,7 @@ const Philosophy = () => {
           <Button 
             size="lg" 
             className="bg-white text-harmony-deep hover:bg-harmony-accent rounded-full px-10 py-6 text-lg"
+            onClick={handleApplyClick}
           >
             Start Your Harmonic Journey
           </Button>
