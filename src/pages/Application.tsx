@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import NavigationHeader from '@/components/NavigationHeader';
@@ -60,22 +61,27 @@ const Application = () => {
     setLoading(true);
 
     try {
+      // Package all form data into the submission_data JSON field
+      const submissionData = {
+        tier: selectedTier,
+        price_id: priceId,
+        first_name: formData.firstName,
+        last_name: formData.lastName,
+        email: formData.email,
+        company_name: formData.companyName,
+        website: formData.website,
+        linkedin: formData.linkedin,
+        application_details: formData.applicationDetails,
+      };
+
       const { data, error } = await supabase
         .from('applications')
         .insert([
           {
             user_id: user.id,
-            tier: selectedTier,
-            price_id: priceId,
-            first_name: formData.firstName,
-            last_name: formData.lastName,
-            email: formData.email,
-            company_name: formData.companyName,
-            website: formData.website,
-            linkedin: formData.linkedin,
-            application_details: formData.applicationDetails,
+            submission_data: submissionData,
             status: 'pending', // Set initial status
-          },
+          }
         ]);
 
       if (error) {
