@@ -5,12 +5,17 @@ project_id = "kdliebqlebfqjcbjxypr"
 verify_jwt = true
 
 [auth]
-site_url = "https://rockematic-kdliebqlebfqjcbjxypr.lovable.dev"
+site_url = "https://rockematic.com"
 additional_redirect_urls = [
+  "https://rockematic.com/auth",
+  "https://rockematic.com/dashboard",
+  "https://rockematic-kdliebqlebfqjcbjxypr.lovable.dev",
   "https://rockematic-kdliebqlebfqjcbjxypr.lovable.dev/auth",
   "https://rockematic-kdliebqlebfqjcbjxypr.lovable.dev/dashboard",
   "http://localhost:5173",
-  "http://localhost:5173/auth",
-  "http://localhost:5173/dashboard"
+  "http://localhost:5173/auth", 
+  "http://localhost:5173/dashboard",
+  "www.rockematic.com",
+  "http://rockematic.com",
+  "http://www.rockematic.com"
 ]
-
