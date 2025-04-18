@@ -39,6 +39,39 @@ export type Database = {
         }
         Relationships: []
       }
+      contact_submissions: {
+        Row: {
+          company: string
+          created_at: string
+          email: string
+          id: string
+          interest: string
+          message: string
+          name: string
+          read: boolean
+        }
+        Insert: {
+          company: string
+          created_at?: string
+          email: string
+          id?: string
+          interest: string
+          message: string
+          name: string
+          read?: boolean
+        }
+        Update: {
+          company?: string
+          created_at?: string
+          email?: string
+          id?: string
+          interest?: string
+          message?: string
+          name?: string
+          read?: boolean
+        }
+        Relationships: []
+      }
       membership_tiers: {
         Row: {
           created_at: string

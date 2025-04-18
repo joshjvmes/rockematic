@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { 
   Card,
@@ -39,6 +38,7 @@ const AdminDashboard = () => {
   const [selectedApplication, setSelectedApplication] = useState<any>(null);
   const [messageRecipient, setMessageRecipient] = useState<any>(null);
   const [isMessageDialogOpen, setIsMessageDialogOpen] = useState(false);
+  const [contactSubmissions, setContactSubmissions] = useState<any[]>([]);
   const { toast } = useToast();
 
   const messageSchema = z.object({
@@ -71,7 +71,6 @@ const AdminDashboard = () => {
     const fetchAdminData = async () => {
       setLoading(true);
       try {
-        // Fetch all applications
         const { data: applicationsData, error: applicationsError } = await supabase
           .from('applications')
           .select(`
@@ -83,13 +82,20 @@ const AdminDashboard = () => {
         if (applicationsError) throw applicationsError;
         setApplications(applicationsData || []);
         
-        // Fetch all users with their profiles
         const { data: usersData, error: usersError } = await supabase
           .from('profiles')
           .select('*');
           
         if (usersError) throw usersError;
         setUsers(usersData || []);
+        
+        const { data: submissionsData, error: submissionsError } = await supabase
+          .from('contact_submissions')
+          .select('*')
+          .order('created_at', { ascending: false });
+          
+        if (submissionsError) throw submissionsError;
+        setContactSubmissions(submissionsData || []);
         
       } catch (error) {
         console.error('Error fetching admin data:', error);
@@ -157,7 +163,6 @@ const AdminDashboard = () => {
         
       if (error) throw error;
       
-      // Update local state
       setApplications(prevApplications => 
         prevApplications.map(app => 
           app.id === selectedApplication.id 
@@ -179,6 +184,34 @@ const AdminDashboard = () => {
         variant: "destructive",
         title: "Failed to update application",
         description: error.message || "An error occurred",
+      });
+    }
+  };
+
+  const markSubmissionAsRead = async (id: string) => {
+    try {
+      const { error } = await supabase
+        .from('contact_submissions')
+        .update({ read: true })
+        .eq('id', id);
+
+      if (error) throw error;
+
+      setContactSubmissions(prev =>
+        prev.map(sub =>
+          sub.id === id ? { ...sub, read: true } : sub
+        )
+      );
+
+      toast({
+        title: "Updated",
+        description: "Marked submission as read",
+      });
+    } catch (error: any) {
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: error.message,
       });
     }
   };
@@ -210,7 +243,7 @@ const AdminDashboard = () => {
         </div>
         
         <Tabs defaultValue="applications" className="mb-8">
-          <TabsList className="grid w-full grid-cols-2 mb-8">
+          <TabsList className="grid w-full grid-cols-3 mb-8">
             <TabsTrigger value="applications">
               <FileText className="mr-2 h-4 w-4" />
               Applications
@@ -219,6 +252,7 @@ const AdminDashboard = () => {
               <Users className="mr-2 h-4 w-4" />
               Users
             </TabsTrigger>
+            <TabsTrigger value="contact">Contact Submissions</TabsTrigger>
           </TabsList>
           
           <TabsContent value="applications">
@@ -374,10 +408,71 @@ const AdminDashboard = () => {
               )}
             </div>
           </TabsContent>
+          
+          <TabsContent value="contact">
+            <div className="grid gap-6">
+              {contactSubmissions.length > 0 ? (
+                contactSubmissions.map((submission) => (
+                  <Card key={submission.id}>
+                    <CardHeader>
+                      <div className="flex justify-between items-start">
+                        <div>
+                          <CardTitle className="text-xl">
+                            {submission.name} - {submission.company}
+                          </CardTitle>
+                          <CardDescription>
+                            Submitted on {formatDate(submission.created_at)}
+                          </CardDescription>
+                        </div>
+                        {!submission.read && (
+                          <Badge className="bg-blue-500">New</Badge>
+                        )}
+                      </div>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-4">
+                        <div>
+                          <p className="font-medium mb-1">Email:</p>
+                          <p className="text-muted-foreground">{submission.email}</p>
+                        </div>
+                        <div>
+                          <p className="font-medium mb-1">Interest:</p>
+                          <p className="text-muted-foreground">{submission.interest}</p>
+                        </div>
+                        <div>
+                          <p className="font-medium mb-1">Message:</p>
+                          <p className="text-muted-foreground whitespace-pre-wrap">
+                            {submission.message}
+                          </p>
+                        </div>
+                      </div>
+                      
+                      {!submission.read && (
+                        <Button 
+                          onClick={() => markSubmissionAsRead(submission.id)}
+                          className="mt-4"
+                        >
+                          Mark as Read
+                        </Button>
+                      )}
+                    </CardContent>
+                  </Card>
+                ))
+              ) : (
+                <Card>
+                  <CardHeader>
+                    <CardTitle>No Contact Submissions</CardTitle>
+                    <CardDescription>
+                      There are no contact form submissions to review
+                    </CardDescription>
+                  </CardHeader>
+                </Card>
+              )}
+            </div>
+          </TabsContent>
         </Tabs>
       </main>
       
-      {/* Message Dialog */}
       <Dialog open={isMessageDialogOpen} onOpenChange={setIsMessageDialogOpen}>
         <DialogContent className="sm:max-w-[500px]">
           <DialogHeader>
@@ -436,7 +531,6 @@ const AdminDashboard = () => {
         </DialogContent>
       </Dialog>
       
-      {/* Application Update Dialog */}
       {selectedApplication && (
         <Dialog 
           open={!!selectedApplication} 
