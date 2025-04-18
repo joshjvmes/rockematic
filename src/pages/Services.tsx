@@ -213,6 +213,7 @@ const Services = () => {
                   priceId="price_H1nYzX2eZvZYx7" // Replace with your actual Stripe price ID
                   mode="subscription"
                   className="w-full bg-harmony-medium hover:bg-harmony-light text-white"
+                  tier="Harmonic Initiate"
                 >
                   Apply Now
                 </PaymentButton>
@@ -261,6 +262,7 @@ const Services = () => {
                   priceId="price_H1nYzX2eZvZYx8" // Replace with your actual Stripe price ID
                   mode="subscription"
                   className="w-full bg-harmony-light hover:bg-harmony-medium text-white"
+                  tier="Resonant Partner"
                 >
                   Apply Now
                 </PaymentButton>
@@ -306,6 +308,7 @@ const Services = () => {
                   priceId="price_H1nYzX2eZvZYx9" // Replace with your actual Stripe price ID
                   mode="subscription"
                   className="w-full bg-harmony-medium hover:bg-harmony-light text-white"
+                  tier="Symphony Conductor"
                 >
                   Apply Now
                 </PaymentButton>
