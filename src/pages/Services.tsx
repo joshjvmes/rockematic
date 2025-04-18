@@ -1,4 +1,3 @@
-
 import React from 'react';
 import NavigationHeader from '@/components/NavigationHeader';
 import Footer from '@/components/Footer';
@@ -6,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import HarmonicCard from '@/components/HarmonicCard';
 import RippleBackground from '@/components/RippleBackground';
 import { Check, BarChart3, Zap, Target, LineChart, Users, Gem, Award } from 'lucide-react';
+import PaymentButton from '@/components/PaymentButton';
 
 const Services = () => {
   return (
@@ -178,7 +178,7 @@ const Services = () => {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Tier 1 */}
+            {/* Harmonic Initiate Tier */}
             <div className="bg-white border border-harmony-light/20 rounded-2xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:translate-y-[-5px]">
               <div className="bg-harmony-deep p-6 text-white text-center">
                 <h3 className="font-serif text-2xl font-bold mb-2">Harmonic Initiate</h3>
@@ -209,13 +209,17 @@ const Services = () => {
                   </li>
                 </ul>
                 
-                <Button className="w-full bg-harmony-medium hover:bg-harmony-light text-white">
+                <PaymentButton
+                  priceId="price_H1nYzX2eZvZYx7" // Replace with your actual Stripe price ID
+                  mode="subscription"
+                  className="w-full bg-harmony-medium hover:bg-harmony-light text-white"
+                >
                   Apply Now
-                </Button>
+                </PaymentButton>
               </div>
             </div>
             
-            {/* Tier 2 - Featured */}
+            {/* Resonant Partner Tier */}
             <div className="bg-white border-2 border-harmony-light rounded-2xl shadow-xl overflow-hidden transition-all duration-300 hover:shadow-2xl hover:translate-y-[-5px] relative">
               <div className="absolute top-0 right-0 bg-harmony-light text-white text-xs px-3 py-1 rounded-bl-lg font-medium">
                 Most Popular
@@ -253,13 +257,17 @@ const Services = () => {
                   </li>
                 </ul>
                 
-                <Button size="lg" className="w-full bg-harmony-light hover:bg-harmony-medium text-white">
+                <PaymentButton
+                  priceId="price_H1nYzX2eZvZYx8" // Replace with your actual Stripe price ID
+                  mode="subscription"
+                  className="w-full bg-harmony-light hover:bg-harmony-medium text-white"
+                >
                   Apply Now
-                </Button>
+                </PaymentButton>
               </div>
             </div>
             
-            {/* Tier 3 */}
+            {/* Symphony Conductor Tier */}
             <div className="bg-white border border-harmony-light/20 rounded-2xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:translate-y-[-5px]">
               <div className="bg-harmony-deep p-6 text-white text-center">
                 <h3 className="font-serif text-2xl font-bold mb-2">Symphony Conductor</h3>
@@ -294,9 +302,13 @@ const Services = () => {
                   </li>
                 </ul>
                 
-                <Button className="w-full bg-harmony-medium hover:bg-harmony-light text-white">
+                <PaymentButton
+                  priceId="price_H1nYzX2eZvZYx9" // Replace with your actual Stripe price ID
+                  mode="subscription"
+                  className="w-full bg-harmony-medium hover:bg-harmony-light text-white"
+                >
                   Apply Now
-                </Button>
+                </PaymentButton>
               </div>
             </div>
           </div>
