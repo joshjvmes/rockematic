@@ -253,7 +253,7 @@ const Contact = () => {
               
               <div className="rounded-2xl overflow-hidden h-80 relative">
                 <iframe 
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2800.8167343201774!2d-122.33232388415213!3d47.60673627918407!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x54906ab3f905c4b1%3A0xcafb360b5c02aa87!2sSeattle%2C%20WA%2C%20USA!5e0!3m2!1sen!2sus!4v1587120783245!5m2!1sen!2sus" 
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2569.5488669143837!2d-119.39142812346143!3d49.88483713253063!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x537d8cb6285ae5bf%3A0x7c929146c841b6da!2s1631%20Dickson%20Ave%20%231800%2C%20Kelowna%2C%20BC%20V1Y%200B5!5e0!3m2!1sen!2sca!4v1682541234567!5m2!1sen!2sca" 
                   width="100%" 
                   height="100%" 
                   style={{ border: 0 }} 
