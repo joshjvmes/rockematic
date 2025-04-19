@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -155,10 +156,10 @@ const NavigationHeader: React.FC = () => {
 
       <div 
         className={cn(
-          'fixed inset-0 flex flex-col pt-20 px-6 md:hidden transition-transform duration-300 ease-in-out z-40',
+          'fixed inset-0 flex flex-col pt-20 px-6 md:hidden transition-transform duration-300 ease-in-out z-40 bg-white', // Added explicit white background
           isMobileMenuOpen 
-            ? 'translate-x-0 bg-background' 
-            : 'translate-x-full bg-background/95'
+            ? 'translate-x-0' 
+            : 'translate-x-full'
         )}
       >
         <nav className="flex flex-col space-y-6 pt-6">
