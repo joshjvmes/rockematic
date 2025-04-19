@@ -2,6 +2,7 @@
 import React from 'react';
 import { cn } from '@/lib/utils';
 import RippleBackground from './RippleBackground';
+import { Link } from 'react-router-dom';
 
 interface HarmonicCardProps {
   title: string;
@@ -10,6 +11,7 @@ interface HarmonicCardProps {
   color?: 'primary' | 'water' | 'forest' | 'sunset';
   className?: string;
   iconClass?: string;
+  href?: string;
 }
 
 const HarmonicCard: React.FC<HarmonicCardProps> = ({
@@ -18,7 +20,8 @@ const HarmonicCard: React.FC<HarmonicCardProps> = ({
   icon,
   color = 'primary',
   className,
-  iconClass
+  iconClass,
+  href
 }) => {
   const colorMap = {
     primary: {
@@ -47,14 +50,8 @@ const HarmonicCard: React.FC<HarmonicCardProps> = ({
     }
   };
 
-  return (
-    <div className={cn(
-      'relative rounded-2xl border p-6 overflow-hidden transition-all duration-500 hover:shadow-lg',
-      colorMap[color].bg,
-      colorMap[color].border,
-      'group',
-      className
-    )}>
+  const CardContent = () => (
+    <>
       <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700">
         <RippleBackground color={colorMap[color].ripple} intensity="soft" />
       </div>
@@ -71,6 +68,31 @@ const HarmonicCard: React.FC<HarmonicCardProps> = ({
       
       <h3 className="text-xl font-serif font-semibold mb-3">{title}</h3>
       <p className="text-muted-foreground">{description}</p>
+    </>
+  );
+
+  return href ? (
+    <Link 
+      to={href}
+      className={cn(
+        'relative rounded-2xl border p-6 overflow-hidden transition-all duration-500 hover:shadow-lg block',
+        colorMap[color].bg,
+        colorMap[color].border,
+        'group',
+        className
+      )}
+    >
+      <CardContent />
+    </Link>
+  ) : (
+    <div className={cn(
+      'relative rounded-2xl border p-6 overflow-hidden transition-all duration-500 hover:shadow-lg',
+      colorMap[color].bg,
+      colorMap[color].border,
+      'group',
+      className
+    )}>
+      <CardContent />
     </div>
   );
 };
