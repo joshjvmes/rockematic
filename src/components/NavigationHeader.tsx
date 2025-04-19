@@ -1,9 +1,8 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import { Menu, X, User, LogOut } from 'lucide-react';
+import { User, LogOut } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { 
   DropdownMenu, 
@@ -24,11 +23,14 @@ const NavigationHeader: React.FC = () => {
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
+      if (isMobileMenuOpen) {
+        setIsMobileMenuOpen(false);
+      }
     };
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [isMobileMenuOpen]);
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -66,7 +68,6 @@ const NavigationHeader: React.FC = () => {
           <span className="font-serif text-2xl font-semibold tracking-tight">RocketNow</span>
         </Link>
 
-        {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8">
           <Link to="/" className="text-foreground/80 hover:text-foreground transition-colors">
             Home
@@ -125,18 +126,29 @@ const NavigationHeader: React.FC = () => {
           )}
         </nav>
 
-        {/* Mobile Menu Button */}
         <button 
-          className="md:hidden p-2 text-foreground"
+          className="md:hidden p-2 text-foreground relative w-8 h-8"
           onClick={toggleMobileMenu}
           aria-expanded={isMobileMenuOpen}
           aria-label="Toggle menu"
         >
-          {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          <div className="absolute inset-0 flex flex-col items-center justify-center">
+            <span 
+              className={cn(
+                "w-6 h-0.5 bg-current transition-all duration-300",
+                isMobileMenuOpen ? "rotate-45 translate-y-0.5" : "-translate-y-0.5"
+              )}
+            />
+            <span 
+              className={cn(
+                "w-6 h-0.5 bg-current transition-all duration-300 mt-1.5",
+                isMobileMenuOpen ? "-rotate-45 -translate-y-1" : "translate-y-0"
+              )}
+            />
+          </div>
         </button>
       </div>
 
-      {/* Mobile Menu */}
       <div 
         className={cn(
           'fixed inset-0 bg-background flex flex-col pt-20 px-6 md:hidden transition-transform duration-300 ease-in-out z-40',
