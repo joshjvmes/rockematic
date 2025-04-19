@@ -23,7 +23,7 @@ const MobileNav: React.FC<MobileNavProps> = ({ isOpen, onClose }) => {
   return (
     <div 
       className={cn(
-        'fixed inset-0 flex flex-col pt-20 px-6 md:hidden transition-transform duration-300 ease-in-out z-40 bg-white',
+        'fixed inset-0 flex flex-col pt-20 px-6 md:hidden transition-transform duration-300 ease-in-out z-40 bg-white', // Changed background to solid white
         isOpen ? 'translate-x-0' : 'translate-x-full'
       )}
     >
@@ -83,7 +83,10 @@ const MobileNav: React.FC<MobileNavProps> = ({ isOpen, onClose }) => {
               Dashboard
             </Link>
             <Button 
-              onClick={handleSignOut}
+              onClick={() => {
+                handleSignOut();
+                onClose();
+              }}
               className="mt-4 bg-harmony-medium hover:bg-harmony-light text-white"
             >
               Sign Out
