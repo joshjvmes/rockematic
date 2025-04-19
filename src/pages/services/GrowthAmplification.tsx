@@ -1,4 +1,3 @@
-
 import React from 'react';
 import NavigationHeader from '@/components/NavigationHeader';
 import Footer from '@/components/Footer';
@@ -8,6 +7,7 @@ import AnimatedText from '@/components/AnimatedText';
 import HarmonicCard from '@/components/HarmonicCard';
 import { LineChart, Target, Layers, Zap, Star, Compass, Sparkles } from 'lucide-react';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from '@/components/ui/breadcrumb';
+import PaymentButton from "@/components/PaymentButton";
 
 const GrowthAmplification = () => {
   return (
@@ -179,15 +179,17 @@ const GrowthAmplification = () => {
               <p className="text-lg text-muted-foreground italic">
                 "In the symphony of business, true growth is not about playing louder, but finding the perfect note."
               </p>
-              <Button 
-                size="lg"
+              <PaymentButton 
+                priceId="price_growth_amplification"
+                mode="subscription"
+                tier="Growth Amplification"
                 className="bg-harmony-medium hover:bg-harmony-light text-white rounded-full px-12 py-6 text-lg shadow-xl shadow-harmony-medium/20 relative overflow-hidden group"
               >
-                <span className="relative z-10">Activate Your Growth Potential</span>
+                <span className="relative z-10">Begin Your Growth Journey</span>
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity">
                   <RippleBackground intensity="strong" />
                 </div>
-              </Button>
+              </PaymentButton>
             </div>
           </div>
         </div>
@@ -199,4 +201,3 @@ const GrowthAmplification = () => {
 };
 
 export default GrowthAmplification;
-

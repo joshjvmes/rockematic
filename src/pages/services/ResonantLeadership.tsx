@@ -1,4 +1,3 @@
-
 import React from 'react';
 import NavigationHeader from '@/components/NavigationHeader';
 import Footer from '@/components/Footer';
@@ -7,6 +6,7 @@ import RippleBackground from '@/components/RippleBackground';
 import { Users, Waves, Heart, Sparkles, Check } from 'lucide-react';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from '@/components/ui/breadcrumb';
 import { Card } from '@/components/ui/card';
+import PaymentButton from "@/components/PaymentButton";
 
 const ResonantLeadership = () => {
   return (
@@ -150,17 +150,19 @@ const ResonantLeadership = () => {
 
               <div className="text-center space-y-6">
                 <p className="text-lg text-muted-foreground italic">
-                  "The most powerful leadership creates ripples that continue long after the initial action."
+                  "True leadership resonates through every level of an organization, creating harmony in action."
                 </p>
-                <Button 
-                  size="lg"
+                <PaymentButton 
+                  priceId="price_resonant_leadership"
+                  mode="subscription"
+                  tier="Resonant Leadership"
                   className="bg-harmony-medium hover:bg-harmony-light text-white rounded-full px-12 py-6 text-lg shadow-xl shadow-harmony-medium/20 relative overflow-hidden group"
                 >
-                  <span className="relative z-10">Begin Your Leadership Journey</span>
+                  <span className="relative z-10">Develop Resonant Leadership</span>
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity">
                     <RippleBackground intensity="strong" />
                   </div>
-                </Button>
+                </PaymentButton>
               </div>
             </div>
           </div>

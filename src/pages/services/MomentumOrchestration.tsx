@@ -1,4 +1,3 @@
-
 import React from 'react';
 import NavigationHeader from '@/components/NavigationHeader';
 import Footer from '@/components/Footer';
@@ -8,6 +7,7 @@ import { BarChart3, Check, ArrowUpRight, Sparkles, Gauge, LineChart } from 'luci
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from '@/components/ui/breadcrumb';
 import AnimatedText from '@/components/AnimatedText';
 import HarmonicCard from '@/components/HarmonicCard';
+import PaymentButton from "@/components/PaymentButton";
 
 const MomentumOrchestration = () => {
   return (
@@ -153,20 +153,21 @@ const MomentumOrchestration = () => {
               </div>
             </section>
 
-            <div className="text-center">
-              <p className="text-lg text-muted-foreground italic mb-8">
-                "True momentum isn't forced—it's orchestrated into being, then naturally sustained."
+            <div className="text-center space-y-6">
+              <p className="text-lg text-muted-foreground italic">
+                "True momentum isn't built in bursts, but in orchestrated movements that compound over time."
               </p>
-              
-              <Button 
-                size="lg"
+              <PaymentButton 
+                priceId="price_momentum_orchestration"
+                mode="subscription"
+                tier="Momentum Orchestration"
                 className="bg-harmony-medium hover:bg-harmony-light text-white rounded-full px-12 py-6 text-lg shadow-xl shadow-harmony-medium/20 relative overflow-hidden group"
               >
-                <span className="relative z-10">Begin Your Momentum Journey</span>
+                <span className="relative z-10">Orchestrate Your Growth</span>
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity">
                   <RippleBackground intensity="strong" />
                 </div>
-              </Button>
+              </PaymentButton>
             </div>
           </div>
         </div>

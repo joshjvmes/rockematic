@@ -1,4 +1,3 @@
-
 import React from 'react';
 import NavigationHeader from '@/components/NavigationHeader';
 import Footer from '@/components/Footer';
@@ -8,6 +7,7 @@ import { Layers, ArrowRight, Check, Zap, Users, Settings } from 'lucide-react';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from '@/components/ui/breadcrumb';
 import AnimatedText from '@/components/AnimatedText';
 import HarmonicCard from '@/components/HarmonicCard';
+import PaymentButton from "@/components/PaymentButton";
 
 const HarmonyIntegration = () => {
   return (
@@ -153,20 +153,21 @@ const HarmonyIntegration = () => {
               </div>
             </section>
 
-            <div className="text-center">
-              <p className="text-lg text-muted-foreground italic mb-8">
-                "True harmony emerges when every part knows its role in the greater symphony."
+            <div className="text-center space-y-6">
+              <p className="text-lg text-muted-foreground italic">
+                "When systems align in perfect harmony, growth becomes an effortless symphony."
               </p>
-              
-              <Button 
-                size="lg"
+              <PaymentButton 
+                priceId="price_harmony_integration"
+                mode="subscription"
+                tier="Harmony Integration"
                 className="bg-harmony-medium hover:bg-harmony-light text-white rounded-full px-12 py-6 text-lg shadow-xl shadow-harmony-medium/20 relative overflow-hidden group"
               >
-                <span className="relative z-10">Begin Your Integration Journey</span>
+                <span className="relative z-10">Integrate Your Systems</span>
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity">
                   <RippleBackground intensity="strong" />
                 </div>
-              </Button>
+              </PaymentButton>
             </div>
           </div>
         </div>

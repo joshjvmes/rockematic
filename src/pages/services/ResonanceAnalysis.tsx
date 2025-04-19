@@ -1,4 +1,3 @@
-
 import React from 'react';
 import NavigationHeader from '@/components/NavigationHeader';
 import Footer from '@/components/Footer';
@@ -8,6 +7,7 @@ import { Target, BarChart3, Check, Waves, LineChart } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from '@/components/ui/breadcrumb';
 import AnimatedText from '@/components/AnimatedText';
+import PaymentButton from "@/components/PaymentButton";
 
 const ResonanceAnalysis = () => {
   return (
@@ -154,17 +154,19 @@ const ResonanceAnalysis = () => {
 
               <div className="text-center space-y-6">
                 <p className="text-lg text-muted-foreground italic">
-                  "In nature, nothing is wasted. The secret is finding where energy naturally wants to flow."
+                  "Understanding your business's natural frequency is the first step toward amplified growth."
                 </p>
-                <Button 
-                  size="lg"
+                <PaymentButton 
+                  priceId="price_resonance_analysis"
+                  mode="subscription"
+                  tier="Resonance Analysis"
                   className="bg-harmony-medium hover:bg-harmony-light text-white rounded-full px-12 py-6 text-lg shadow-xl shadow-harmony-medium/20 relative overflow-hidden group"
                 >
-                  <span className="relative z-10">Begin Your Analysis Journey</span>
+                  <span className="relative z-10">Start Your Analysis</span>
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity">
                     <RippleBackground intensity="strong" />
                   </div>
-                </Button>
+                </PaymentButton>
               </div>
             </div>
           </div>
