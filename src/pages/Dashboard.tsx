@@ -17,6 +17,7 @@ import { useAuth } from '@/context/AuthContext';
 import { supabase } from '@/integrations/supabase/client';
 import { Loader2, ArrowRight, FileText, MessageSquare } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import ApplicationView from '@/components/ApplicationView';
 
 const Dashboard = () => {
   const { user } = useAuth();
@@ -148,7 +149,10 @@ const Dashboard = () => {
           <Tabs defaultValue="memberships" className="mb-8">
             <TabsList className="grid w-full grid-cols-3 mb-8">
               <TabsTrigger value="memberships">Memberships</TabsTrigger>
-              <TabsTrigger value="applications">Applications</TabsTrigger>
+              <TabsTrigger value="applications">
+                <FileText className="mr-2 h-4 w-4" />
+                Applications
+              </TabsTrigger>
               <TabsTrigger value="messages">
                 Messages
                 {messages.filter(m => !m.read).length > 0 && (
@@ -222,64 +226,31 @@ const Dashboard = () => {
             </TabsContent>
             
             <TabsContent value="applications">
-              {applications.length > 0 ? (
-                <div className="grid gap-6">
-                  {applications.map((application) => (
-                    <Card key={application.id}>
-                      <CardHeader>
-                        <div className="flex justify-between items-start">
-                          <div>
-                            <CardTitle className="text-xl">
-                              Application
-                            </CardTitle>
-                            <CardDescription>
-                              Submitted on {formatDate(application.created_at)}
-                            </CardDescription>
-                          </div>
-                          <Badge className={getStatusColor(application.status)}>
-                            {application.status.charAt(0).toUpperCase() + application.status.slice(1)}
-                          </Badge>
-                        </div>
-                      </CardHeader>
-                      <CardContent>
-                        {application.feedback && (
-                          <div className="p-4 bg-muted rounded-lg mb-4">
-                            <h4 className="font-medium mb-1">Feedback:</h4>
-                            <p>{application.feedback}</p>
-                          </div>
-                        )}
-                        <div className="flex items-center">
-                          <FileText className="text-harmony-medium mr-2 h-5 w-5" />
-                          <span>Application details</span>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  ))}
-                </div>
-              ) : (
-                <Card className="bg-muted/40">
-                  <CardHeader>
-                    <CardTitle>No Applications</CardTitle>
-                    <CardDescription>
-                      You haven't submitted any applications yet
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="mb-4">
-                      Apply to join our Harmonic Growth program and start your journey towards accelerated success.
-                    </p>
-                  </CardContent>
-                  <CardFooter>
-                    <Button 
-                      onClick={handleApplyClick}
-                      className="bg-harmony-medium hover:bg-harmony-light text-white"
-                    >
-                      Apply Now
-                      <ArrowRight className="ml-2 h-4 w-4" />
-                    </Button>
-                  </CardFooter>
-                </Card>
-              )}
+              <div className="space-y-6">
+                <h2 className="text-2xl font-semibold tracking-tight">Your Applications</h2>
+                {applications.length > 0 ? (
+                  applications.map((application) => (
+                    <ApplicationView 
+                      key={application.id} 
+                      application={application} 
+                      onUpdate={fetchUserData}
+                      editable={application.status === 'pending'}
+                    />
+                  ))
+                ) : (
+                  <Card>
+                    <CardContent className="pt-6 text-center">
+                      <p className="text-muted-foreground mb-4">You haven't submitted any applications yet.</p>
+                      <Button 
+                        onClick={() => navigate('/apply')}
+                        className="bg-harmony-medium hover:bg-harmony-light"
+                      >
+                        Apply Now
+                      </Button>
+                    </CardContent>
+                  </Card>
+                )}
+              </div>
             </TabsContent>
             
             <TabsContent value="messages">

@@ -71,21 +71,33 @@ const AdminDashboard = () => {
     const fetchAdminData = async () => {
       setLoading(true);
       try {
-        // Fetch applications with profiles data
         const { data: applicationsData, error: applicationsError } = await supabase
           .from('applications')
-          .select(`
-            *,
-            profiles:user_id (
-              full_name,
-              email,
-              company
-            )
-          `)
+          .select('*')
           .order('created_at', { ascending: false });
           
         if (applicationsError) throw applicationsError;
-        setApplications(applicationsData || []);
+        
+        if (applicationsData && applicationsData.length > 0) {
+          const enrichedApplications = await Promise.all(
+            applicationsData.map(async (app) => {
+              const { data: profileData } = await supabase
+                .from('profiles')
+                .select('full_name, email, company')
+                .eq('id', app.user_id)
+                .single();
+                
+              return {
+                ...app,
+                profiles: profileData || { full_name: 'Unknown User', email: 'No email', company: 'No company' }
+              };
+            })
+          );
+          
+          setApplications(enrichedApplications);
+        } else {
+          setApplications(applicationsData || []);
+        }
         
         const { data: usersData, error: usersError } = await supabase
           .from('profiles')

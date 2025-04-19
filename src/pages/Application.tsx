@@ -1,341 +1,66 @@
 
-import React, { useState, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import NavigationHeader from '@/components/NavigationHeader';
-import Footer from '@/components/Footer';
-import { Button } from '@/components/ui/button';
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import { useToast } from "@/components/ui/use-toast";
-import { supabase } from "@/integrations/supabase/client";
-import { useAuth } from "@/context/AuthContext";
+// We need to make sure the Application.tsx file correctly stores all the form data
 
-const Application = () => {
-  const location = useLocation();
-  const navigate = useNavigate();
-  const { toast } = useToast();
-  const { user } = useAuth();
+// Update the handleSubmit function to ensure all fields are saved properly:
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
 
-  const [selectedTier, setSelectedTier] = useState<string | null>(null);
-  const [priceId, setPriceId] = useState<string | null>(null);
-  const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    companyName: '',
-    website: '',
-    linkedin: '',
-    applicationDetails: '',
-  });
-  const [loading, setLoading] = useState(false);
-  const [hasExistingApplication, setHasExistingApplication] = useState(false);
-  const [checkingApplication, setCheckingApplication] = useState(true);
+  if (!user || !selectedTier || !priceId) {
+    toast({
+      title: "Error",
+      description: "Missing user or tier information. Please try again.",
+      variant: "destructive",
+    });
+    return;
+  }
 
-  useEffect(() => {
-    // First check if user already has an application
-    const checkExistingApplication = async () => {
-      if (!user) return;
-      
-      try {
-        setCheckingApplication(true);
-        const { data, error } = await supabase
-          .from('applications')
-          .select('id, status')
-          .eq('user_id', user.id);
-          
-        if (error) throw error;
-        
-        if (data && data.length > 0) {
-          setHasExistingApplication(true);
-          toast({
-            title: "Application Already Exists",
-            description: "You already have an application in our system. Check its status on your dashboard.",
-          });
-          // Short delay before redirecting to dashboard
-          setTimeout(() => navigate('/dashboard'), 2000);
-        }
-      } catch (error) {
-        console.error('Error checking application status:', error);
-      } finally {
-        setCheckingApplication(false);
-      }
+  setLoading(true);
+
+  try {
+    // Package all form data into the submission_data JSON field
+    const submissionData = {
+      tier: selectedTier,
+      price_id: priceId,
+      first_name: formData.firstName,
+      last_name: formData.lastName,
+      email: formData.email,
+      company_name: formData.companyName,
+      website: formData.website,
+      linkedin: formData.linkedin,
+      application_details: formData.applicationDetails,
     };
-    
-    checkExistingApplication();
-    
-    // Then set form data from location state
-    if (location.state && location.state.selectedTier && location.state.priceId) {
-      setSelectedTier(location.state.selectedTier);
-      setPriceId(location.state.priceId);
-      setFormData(prev => ({ ...prev, email: user?.email || '' }));
-    } else {
-      // Redirect to services page if no tier is selected
-      toast({
-        title: "Tier Selection Required",
-        description: "Please select a membership tier before applying.",
-      });
-      navigate('/services');
-    }
-  }, [location.state, navigate, user, toast]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-  };
+    console.log("Submitting application with data:", submissionData);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+    const { data, error } = await supabase
+      .from('applications')
+      .insert([
+        {
+          user_id: user.id,
+          submission_data: submissionData,
+          status: 'pending', // Set initial status
+        }
+      ]);
 
-    if (!user || !selectedTier || !priceId) {
-      toast({
-        title: "Error",
-        description: "Missing user or tier information. Please try again.",
-        variant: "destructive",
-      });
-      return;
+    if (error) {
+      throw error;
     }
 
-    setLoading(true);
+    toast({
+      title: "Application Submitted",
+      description: "Your application has been submitted successfully!",
+    });
 
-    try {
-      // Package all form data into the submission_data JSON field
-      const submissionData = {
-        tier: selectedTier,
-        price_id: priceId,
-        first_name: formData.firstName,
-        last_name: formData.lastName,
-        email: formData.email,
-        company_name: formData.companyName,
-        website: formData.website,
-        linkedin: formData.linkedin,
-        application_details: formData.applicationDetails,
-      };
-
-      const { data, error } = await supabase
-        .from('applications')
-        .insert([
-          {
-            user_id: user.id,
-            submission_data: submissionData,
-            status: 'pending', // Set initial status
-          }
-        ]);
-
-      if (error) {
-        throw error;
-      }
-
-      toast({
-        title: "Application Submitted",
-        description: "Your application has been submitted successfully!",
-      });
-
-      // Redirect to dashboard
-      navigate('/dashboard');
-    } catch (error: any) {
-      console.error('Application submission error:', error);
-      toast({
-        title: "Error",
-        description: `There was a problem submitting your application. Please try again. ${error.message}`,
-        variant: "destructive",
-      });
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  if (checkingApplication) {
-    return (
-      <div className="min-h-screen bg-gray-100">
-        <NavigationHeader />
-        <main className="container mx-auto py-12 px-4 flex items-center justify-center">
-          <div className="text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-harmony-medium mx-auto mb-4"></div>
-            <p>Checking application status...</p>
-          </div>
-        </main>
-        <Footer />
-      </div>
-    );
+    // Redirect to dashboard
+    navigate('/dashboard');
+  } catch (error: any) {
+    console.error('Application submission error:', error);
+    toast({
+      title: "Error",
+      description: `There was a problem submitting your application. Please try again. ${error.message}`,
+      variant: "destructive",
+    });
+  } finally {
+    setLoading(false);
   }
-
-  if (hasExistingApplication) {
-    return (
-      <div className="min-h-screen bg-gray-100">
-        <NavigationHeader />
-        <main className="container mx-auto py-12 px-4">
-          <div className="max-w-lg mx-auto bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 text-center">
-            <h2 className="text-2xl font-semibold mb-4">Application Already Exists</h2>
-            <p className="mb-6">You already have an application in our system. Redirecting to your dashboard...</p>
-            <Button 
-              onClick={() => navigate('/dashboard')}
-              className="bg-harmony-medium hover:bg-harmony-light text-white"
-            >
-              Go to Dashboard
-            </Button>
-          </div>
-        </main>
-        <Footer />
-      </div>
-    );
-  }
-
-  if (!selectedTier) {
-    return (
-      <div className="min-h-screen bg-gray-100">
-        <NavigationHeader />
-        <main className="container mx-auto py-12 px-4">
-          <div className="max-w-lg mx-auto bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 text-center">
-            <h2 className="text-2xl font-semibold mb-4">Select a Tier</h2>
-            <p className="mb-6">Please select a membership tier before applying.</p>
-            <Button 
-              onClick={() => navigate('/services')}
-              className="bg-harmony-medium hover:bg-harmony-light text-white"
-            >
-              View Membership Tiers
-            </Button>
-          </div>
-        </main>
-        <Footer />
-      </div>
-    );
-  }
-
-  return (
-    <div className="min-h-screen bg-gray-100">
-      <NavigationHeader />
-
-      <main className="container mx-auto py-12 px-4">
-        <h1 className="text-3xl font-semibold mb-6">Application for {selectedTier}</h1>
-
-        <form onSubmit={handleSubmit} className="max-w-lg mx-auto bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-          <div className="mb-4">
-            <Label htmlFor="firstName" className="block text-gray-700 text-sm font-bold mb-2">
-              First Name
-            </Label>
-            <Input
-              type="text"
-              id="firstName"
-              name="firstName"
-              placeholder="First Name"
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              onChange={handleChange}
-              value={formData.firstName}
-              required
-            />
-          </div>
-
-          <div className="mb-4">
-            <Label htmlFor="lastName" className="block text-gray-700 text-sm font-bold mb-2">
-              Last Name
-            </Label>
-            <Input
-              type="text"
-              id="lastName"
-              name="lastName"
-              placeholder="Last Name"
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              onChange={handleChange}
-              value={formData.lastName}
-              required
-            />
-          </div>
-
-          <div className="mb-4">
-            <Label htmlFor="email" className="block text-gray-700 text-sm font-bold mb-2">
-              Email
-            </Label>
-            <Input
-              type="email"
-              id="email"
-              name="email"
-              placeholder="Email"
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              onChange={handleChange}
-              value={formData.email}
-              required
-              disabled={!!user?.email}
-            />
-          </div>
-
-          <div className="mb-4">
-            <Label htmlFor="companyName" className="block text-gray-700 text-sm font-bold mb-2">
-              Company Name
-            </Label>
-            <Input
-              type="text"
-              id="companyName"
-              name="companyName"
-              placeholder="Company Name"
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              onChange={handleChange}
-              value={formData.companyName}
-              required
-            />
-          </div>
-
-          <div className="mb-4">
-            <Label htmlFor="website" className="block text-gray-700 text-sm font-bold mb-2">
-              Website
-            </Label>
-            <Input
-              type="url"
-              id="website"
-              name="website"
-              placeholder="Website URL"
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              onChange={handleChange}
-              value={formData.website}
-            />
-          </div>
-
-          <div className="mb-4">
-            <Label htmlFor="linkedin" className="block text-gray-700 text-sm font-bold mb-2">
-              LinkedIn Profile
-            </Label>
-            <Input
-              type="url"
-              id="linkedin"
-              name="linkedin"
-              placeholder="LinkedIn Profile URL"
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              onChange={handleChange}
-              value={formData.linkedin}
-            />
-          </div>
-
-          <div className="mb-6">
-            <Label htmlFor="applicationDetails" className="block text-gray-700 text-sm font-bold mb-2">
-              Why are you applying?
-            </Label>
-            <Textarea
-              id="applicationDetails"
-              name="applicationDetails"
-              placeholder="Tell us more about your business and why you're interested in this tier."
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              onChange={handleChange}
-              value={formData.applicationDetails}
-              rows={4}
-              required
-            />
-          </div>
-
-          <div className="flex items-center justify-between">
-            <Button
-              className="bg-harmony-medium hover:bg-harmony-light text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              type="submit"
-              disabled={loading}
-            >
-              {loading ? 'Submitting...' : 'Submit Application'}
-            </Button>
-          </div>
-        </form>
-      </main>
-
-      <Footer />
-    </div>
-  );
 };
-
-export default Application;
