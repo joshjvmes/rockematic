@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { 
@@ -27,49 +28,49 @@ const Dashboard = () => {
   const [messages, setMessages] = useState<any[]>([]);
   const navigate = useNavigate();
 
+  const fetchUserData = async () => {
+    setLoading(true);
+    try {
+      // Fetch applications
+      const { data: applicationsData, error: applicationsError } = await supabase
+        .from('applications')
+        .select('*')
+        .eq('user_id', user?.id);
+        
+      if (applicationsError) throw applicationsError;
+      setApplications(applicationsData || []);
+      
+      // Fetch memberships with tier info
+      const { data: membershipsData, error: membershipsError } = await supabase
+        .from('user_memberships')
+        .select(`
+          *,
+          membership_tiers (*)
+        `)
+        .eq('user_id', user?.id)
+        .eq('active', true);
+        
+      if (membershipsError) throw membershipsError;
+      setMemberships(membershipsData || []);
+      
+      // Fetch messages
+      const { data: messagesData, error: messagesError } = await supabase
+        .from('messages')
+        .select('*')
+        .eq('recipient_id', user?.id)
+        .order('created_at', { ascending: false });
+        
+      if (messagesError) throw messagesError;
+      setMessages(messagesData || []);
+      
+    } catch (error) {
+      console.error('Error fetching user data:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    const fetchUserData = async () => {
-      setLoading(true);
-      try {
-        // Fetch applications
-        const { data: applicationsData, error: applicationsError } = await supabase
-          .from('applications')
-          .select('*')
-          .eq('user_id', user?.id);
-          
-        if (applicationsError) throw applicationsError;
-        setApplications(applicationsData || []);
-        
-        // Fetch memberships with tier info
-        const { data: membershipsData, error: membershipsError } = await supabase
-          .from('user_memberships')
-          .select(`
-            *,
-            membership_tiers (*)
-          `)
-          .eq('user_id', user?.id)
-          .eq('active', true);
-          
-        if (membershipsError) throw membershipsError;
-        setMemberships(membershipsData || []);
-        
-        // Fetch messages
-        const { data: messagesData, error: messagesError } = await supabase
-          .from('messages')
-          .select('*')
-          .eq('recipient_id', user?.id)
-          .order('created_at', { ascending: false });
-          
-        if (messagesError) throw messagesError;
-        setMessages(messagesData || []);
-        
-      } catch (error) {
-        console.error('Error fetching user data:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    
     if (user) {
       fetchUserData();
     }
