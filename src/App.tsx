@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -22,6 +23,7 @@ import HarmonyIntegration from "./pages/services/HarmonyIntegration";
 import FlowAutomation from "./pages/services/FlowAutomation";
 import ResonantLeadership from "./pages/services/ResonantLeadership";
 import HarmonicGrowthSystem from "./pages/services/HarmonicGrowthSystem";
+import PaymentSuccess from "./pages/PaymentSuccess";
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
 
@@ -47,6 +49,7 @@ const App = () => (
             <Route path="/services/harmonic-growth-system" element={<HarmonicGrowthSystem />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/auth" element={<AuthPage />} />
+            <Route path="/payment-success" element={<PaymentSuccess />} />
             
             <Route path="/dashboard" element={
               <ProtectedRoute>
