@@ -71,11 +71,16 @@ const AdminDashboard = () => {
     const fetchAdminData = async () => {
       setLoading(true);
       try {
+        // Fetch applications with profiles data
         const { data: applicationsData, error: applicationsError } = await supabase
           .from('applications')
           .select(`
             *,
-            profiles:user_id (full_name, email)
+            profiles:user_id (
+              full_name,
+              email,
+              company
+            )
           `)
           .order('created_at', { ascending: false });
           
