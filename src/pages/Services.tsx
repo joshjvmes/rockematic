@@ -345,6 +345,7 @@ const Services = () => {
           <Button 
             size="lg" 
             className="bg-white text-harmony-deep hover:bg-harmony-accent hover:text-harmony-deep rounded-full px-10 py-6 text-lg"
+            onClick={() => navigate('/contact')}
           >
             Request Your Consultation
           </Button>
