@@ -1,73 +1,79 @@
-# Welcome to your Lovable project
 
-## Project info
+# RocketNow – The Harmonic Growth Engine
 
-**URL**: https://lovable.dev/projects/403dfb51-b247-49b4-9e2c-5f6a5fb49b4d
+## Overview
 
-## How can I edit this code?
+RocketNow is a transformative growth partnership that reimagines business development through a unique, resonant approach. Our mission is to help businesses achieve exponential growth by aligning strategy with a natural, harmonic rhythm.
 
-There are several ways of editing your application.
+## Our Philosophy: Growth as a Symphony
 
-**Use Lovable**
+Where traditional consulting sees business growth as a linear process, RocketNow views it as a dynamic, interconnected symphony. Just as a musical composition emerges from the precise interaction of different notes and instruments, we believe business success comes from carefully tuned strategic elements working in harmony.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/403dfb51-b247-49b4-9e2c-5f6a5fb49b4d) and start prompting.
+### Key Principles
 
-Changes made via Lovable will be committed automatically to this repo.
+- **Resonant Returns**: Small, strategic inputs can trigger significant, amplified outcomes.
+- **Effortless Flow**: Create momentum that builds naturally, cascading from one success to the next.
+- **Selective Partnership**: We work only with businesses that resonate with our vision of sustainable, meaningful growth.
 
-**Use your preferred IDE**
+## Website Features
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### Landing Page
+- Immersive hero section introducing the "Harmonic Growth Engine" concept
+- Animated text and visual metaphors representing growth dynamics
+- Clear calls-to-action: "Join the Symphony" and "Learn More"
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+### Application Process
+A carefully curated onboarding experience that goes beyond traditional application forms:
+- Multi-step application exploring business goals, challenges, and growth philosophy
+- Tier-based membership model (Harmonic Initiate, Resonate Partner, Symphony Conductor)
+- Personalized review process ensuring alignment with RocketNow's values
 
-Follow these steps:
+### Client Portal
+A dedicated space for members that includes:
+- Membership tier details and benefits
+- Communication channels with the RocketNow team
+- Resources and growth tracking tools
+- Personalized messaging and updates
+
+## Technology Stack
+
+- Frontend: React with Vite
+- Styling: Tailwind CSS, Shadcn UI
+- Backend: Supabase
+- Authentication: Supabase Auth
+- Payments: Stripe integration
+
+## Getting Started
+
+### Development
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+# Clone the repository
+git clone <repository-url>
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+# Install dependencies
+npm install
 
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Start development server
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+## Deployment
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+Deployed via Lovable with one-click publishing. Custom domain support available.
 
-**Use GitHub Codespaces**
+## Contact
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+- Email: harmony@rocketnow.com
+- Phone: +1 (778) 760-0329
+- Address: Suite 1800 - 1631 Dickson Rd, Kelowna, BC V1Y 0B5
 
-## What technologies are used for this project?
+## Connect With Us
 
-This project is built with:
+- [LinkedIn](https://www.linkedin.com/company/rocket-now-marketing)
+- [Twitter](https://x.com/teamrckt)
+- [Instagram](https://www.instagram.com/teamrckt)
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+---
 
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/403dfb51-b247-49b4-9e2c-5f6a5fb49b4d) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+*Where growth moves to a natural rhythm, and every success resonates with purpose.*
