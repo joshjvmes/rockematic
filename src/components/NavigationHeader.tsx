@@ -136,13 +136,17 @@ const NavigationHeader: React.FC = () => {
             <span 
               className={cn(
                 "w-6 h-0.5 bg-current transition-all duration-300",
-                isMobileMenuOpen ? "rotate-45 translate-y-0.5" : "-translate-y-0.5"
+                isMobileMenuOpen 
+                  ? "rotate-45 translate-y-[3px] bg-foreground" 
+                  : "-translate-y-0.5"
               )}
             />
             <span 
               className={cn(
                 "w-6 h-0.5 bg-current transition-all duration-300 mt-1.5",
-                isMobileMenuOpen ? "-rotate-45 -translate-y-1" : "translate-y-0"
+                isMobileMenuOpen 
+                  ? "-rotate-45 -translate-y-0 bg-foreground" 
+                  : "translate-y-0"
               )}
             />
           </div>
@@ -151,8 +155,10 @@ const NavigationHeader: React.FC = () => {
 
       <div 
         className={cn(
-          'fixed inset-0 bg-background flex flex-col pt-20 px-6 md:hidden transition-transform duration-300 ease-in-out z-40',
-          isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
+          'fixed inset-0 flex flex-col pt-20 px-6 md:hidden transition-transform duration-300 ease-in-out z-40',
+          isMobileMenuOpen 
+            ? 'translate-x-0 bg-background' 
+            : 'translate-x-full bg-background/95'
         )}
       >
         <nav className="flex flex-col space-y-6 pt-6">
