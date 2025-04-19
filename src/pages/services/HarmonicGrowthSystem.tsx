@@ -1,4 +1,3 @@
-
 import React from 'react';
 import NavigationHeader from '@/components/NavigationHeader';
 import Footer from '@/components/Footer';
@@ -106,6 +105,7 @@ const HarmonicGrowthSystem = () => {
                     icon={<ArrowRight className="h-6 w-6 text-harmony-medium" />}
                     color="water"
                     className="hover:translate-y-[-5px] transition-transform duration-300"
+                    href={service.link}
                   />
                 ))}
               </div>
